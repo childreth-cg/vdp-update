@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/cg-herbie-brand-kit-a90bbd22-499b-4d99-ae97-0f506fc04599/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/cg-herbie-brand-kit-a90bbd22-499b-4d99-ae97-0f506fc04599/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/cg-herbie-brand-kit-a90bbd22-499b-4d99-ae97-0f506fc04599/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/cg-herbie-brand-kit-a90bbd22-499b-4d99-ae97-0f506fc04599/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/cg-herbie-brand-kit-a90bbd22-499b-4d99-ae97-0f506fc04599/components/components.css">
+  <link rel="stylesheet" href="_ds/cg-herbie-brand-kit-a90bbd22-499b-4d99-ae97-0f506fc04599/styles.css">
+  <script src="_ds/cg-herbie-brand-kit-a90bbd22-499b-4d99-ae97-0f506fc04599/_ds_bundle.js"></script>
+  <script src="./image-slot.js"></script>
+  <style>
+    html, body { margin: 0; background: #E9ECF1; }
+    a { color: var(--cg-navy); }
+    a:hover { color: var(--cg-midnight); }
+    .vdp-scroll::-webkit-scrollbar, .vdp-tabs::-webkit-scrollbar { display: none; }
+  </style>
+</helmet>
+
+<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; padding: 40px 20px; box-sizing: border-box; font-family: var(--font-body); color: var(--ink-900); width: 100%; position: absolute; left: 15px; top: 4px">
+  <div style="width: 393px; height: 852px; border-radius: 60px; background: #000; padding: 12px; box-shadow: 0 30px 60px rgba(0,0,73,0.18); flex-shrink: 0;">
+    <div data-screen-label="VDP" style="position: relative; width: 100%; height: 100%; border-radius: 48px; overflow: hidden; background: var(--cg-midnight);">
+
+      <!-- Gallery (behind sheet) -->
+      <div class="vdp-scroll" ref="{{ galleryRef }}" onScroll="{{ onGalleryScroll }}" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; padding-top: 104px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; display: flex; flex-direction: column; gap: 4px; padding-bottom: 340px; box-sizing: border-box;">
+        <div style="height: 248px; flex-shrink: 0; position: relative;">
+          <image-slot id="vdp-hero" src="assets/gallery/vdp-hero.webp" shape="rounded" radius="10" placeholder="Hero vehicle photo"></image-slot>
+        </div>
+        <sc-for list="{{ galleryRepeats }}" as="g" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 4px; flex-shrink: 0;">
+            <div style="height: 140px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 4px;">
+              <div style="position: relative;"><image-slot id="vdp-thumb-{{ g.n }}-1" src="assets/gallery/vdp-thumb-{{ g.n }}-1.webp" shape="rounded" radius="10" placeholder="Rear 3/4"></image-slot></div>
+              <div style="position: relative;"><image-slot id="vdp-thumb-{{ g.n }}-2" src="assets/gallery/vdp-thumb-{{ g.n }}-2.webp" shape="rounded" radius="10" placeholder="Rear"></image-slot></div>
+            </div>
+            <div style="height: 280px; position: relative;"><image-slot id="vdp-thumb-{{ g.n }}-3" src="assets/gallery/vdp-thumb-{{ g.n }}-3.webp" shape="rounded" radius="10" placeholder="Interior"></image-slot></div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- Header -->
+      <div style="position: absolute; left: 0; right: 0; top: 0; height: 104px; background: rgba(0,0,73,0.8); z-index: 3; pointer-events: none;">
+        <div style="position: absolute; left: 0; right: 0; top: 100%; height: 32px; background: linear-gradient(rgba(0,0,73,0.8), rgba(0,0,73,0.45) 45%, rgba(0,0,73,0)); opacity: {{ headerFade }}; transition: opacity 160ms cubic-bezier(0.2,0.6,0.2,1);"></div>
+        <div style="height: 54px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px 0 44px; color: #fff; font: 600 17px/1 var(--font-body);">
+          <span>9:41</span>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="8" width="3" height="4" rx="1"></rect><rect x="5" y="5" width="3" height="7" rx="1"></rect><rect x="10" y="2.5" width="3" height="9.5" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></svg>
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M1 4.2a10 10 0 0 1 14 0"></path><path d="M3.8 7a6 6 0 0 1 8.4 0"></path><circle cx="8" cy="10" r="1" fill="#fff"></circle></svg>
+            <div style="width: 25px; height: 12px; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 4px; padding: 1.5px; box-sizing: border-box;"><div style="width: 100%; height: 100%; background: #fff; border-radius: 2px;"></div></div>
+          </div>
+        </div>
+        <div style="position: absolute; left: 50%; top: 11px; transform: translateX(-50%); width: 120px; height: 34px; border-radius: 20px; background: #000;"></div>
+        <div style="height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; pointer-events: auto;">
+          <button aria-label="Back" style="width: 40px; height: 32px; border-radius: 16px; border: 1.5px solid var(--cg-blue); background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+          </button>
+          <img src="uploads/CarGurus Logo.png" alt="CarGurus" style="height: 20px">
+          <button aria-label="Ask Guru" style="width: 40px; height: 32px; border-radius: 16px; border: none; padding: 1.5px; background: linear-gradient(135deg, var(--cg-red), var(--cg-navy) 55%, var(--cg-blue)); cursor: pointer">
+            <span style="display: flex; width: 100%; height: 100%; border-radius: 16px; background: #0B0B3A; align-items: center; justify-content: center">
+              <img src="assets/sparkle.svg" alt="" style="width: 18px; height: 18px; filter: brightness(0) invert(1);">
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Scrolling sheet -->
+      <div class="vdp-scroll" ref="{{ sheetRef }}" onScroll="{{ onScroll }}" style="position: absolute; left: 0; right: 0; top: 116px; bottom: 0; clip-path: inset(0 round 24px 24px 0 0); scroll-snap-type: {{ snapType }}; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; z-index: 4; pointer-events: none">
+        <div style="height: 442px; scroll-snap-align: start;"></div>
+        <div style="position: sticky; top: 0; z-index: 2; height: 0; pointer-events: none">
+          <div style="position: absolute; left: 0; right: 0; top: 0; height: 28px; pointer-events: none; border-radius: 24px 24px 0 0; background: linear-gradient(var(--fog), rgba(244,246,249,0)); opacity: {{ fadeOpacity }}; transition: opacity 160ms cubic-bezier(0.2,0.6,0.2,1)"></div>
+          <div onClick="{{ resetSheet }}" style="position: absolute; left: 0; right: 0; top: 0; height: 20px; display: flex; justify-content: center; padding-top: 8px; box-sizing: border-box; pointer-events: auto; cursor: {{ gripCursor }}">
+            <span style="width: 36px; height: 5px; border-radius: 3px; background: var(--gray-300);"></span>
+          </div>
+        </div>
+        <div style="scroll-snap-align: start; background: var(--fog); border-radius: {{ sheetRadius }}; transition: border-radius 160ms cubic-bezier(0.2,0.6,0.2,1); padding: 20px 16px 140px; display: flex; flex-direction: column; gap: 12px; pointer-events: auto; min-height: 700px">
+
+          <!-- Summary -->
+          <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 0px">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: -8px">
+              <div style="font: 500 16px/1.2 var(--font-body); color: var(--ink-900); padding-top: 8px">2026 Toyota 4Runner SR5 4WD</div>
+              <div style="display: flex; gap: 4px; flex-shrink: 0">
+                <button aria-label="Share" style="width: 40px; height: 32px; border-radius: 16px; border: none; background: #fff; box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08); display: flex; align-items: center; justify-content: center; cursor: pointer">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-900)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5"></path><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"></path></svg>
+                </button>
+                <button aria-label="Save" onClick="{{ toggleSaved }}" style="width: 40px; height: 32px; border-radius: 16px; border: none; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="{{ heartFill }}" stroke="var(--cg-red)" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20.5s-8-4.9-8-11A4.5 4.5 0 0 1 12 6.6 4.5 4.5 0 0 1 20 9.5c0 6.1-8 11-8 11z"></path></svg>
+                </button>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding-top: 8px">
+              <span style="font: 560 32px/1.05 var(--font-body); color: var(--cg-midnight); letter-spacing: -0.01em">$43,792</span>
+              <a href="#" style="display: inline-flex; align-items: center; gap: 4px; font: 400 15px/1 var(--font-body); color: var(--gray-600); text-decoration: underline;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"></path><circle cx="8" cy="8" r="1.5"></circle></svg>
+                Includes fees
+              </a>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-top: 4px;">
+              <span style="display: inline-flex; align-items: center; gap: 8px;"><x-import component-from-global-scope="CarGurusDesignSystem_a90bbd.DealRating" rating="great" size="{{ 20 }}" show-label="{{ false }}" hint-size="20px,20px"></x-import><span style="font: 500 16px/1 var(--font-body); color: var(--cg-midnight); white-space: nowrap;">Great Deal</span></span>
+              <span style="font: 500 16px/1 var(--font-body); color: var(--deal-great)">$1,967 below market</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-top: 6px; font: 400 15px/1 var(--font-body); color: var(--ink-900); flex-wrap: wrap;">
+              <a href="#" style="display: inline-flex; align-items: center; gap: 5px; color: var(--ink-900);">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M8 7h8M8 11h1M11.5 11h1M15 11h1M8 14.5h1M11.5 14.5h1M15 14.5h1M8 18h1M11.5 18h1M15 18h1"></path></svg>
+                Est. $529/mo
+              </a>
+              <span style="width: 1px; height: 14px; background: var(--gray-300);"></span>
+              <span style="display: inline-flex; align-items: center; gap: 5px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 12l3-4M7 13h1M16 13h1M12 7v1"></path></svg>
+                32.5k mi
+              </span>
+              <span style="width: 1px; height: 14px; background: var(--gray-300);"></span>
+              <span style="display: inline-flex; align-items: center; gap: 5px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+                Boston, MA
+              </span>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div ref="{{ ctaRef }}" style="display: flex; flex-direction: column; gap: 0px; margin-top: 8px">
+            <x-import component-from-global-scope="CarGurusDesignSystem_a90bbd.Button" variant="primary" full-width="{{ true }}" style="{{ ctaStyle }}" hint-size="100%,52px">Check availability</x-import>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px">
+              <x-import component-from-global-scope="CarGurusDesignSystem_a90bbd.Button" variant="secondary" full-width="{{ true }}" icon="{{ textIcon }}" dc-props="{{ softBtnProps }}" hint-size="100%,44px">Text</x-import><x-import component-from-global-scope="CarGurusDesignSystem_a90bbd.Button" variant="secondary" full-width="{{ true }}" icon="{{ callIcon }}" dc-props="{{ softBtnProps }}" hint-size="100%,52px">Call</x-import>
+              
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; opacity: {{ detailOpacity }}; transition: opacity 240ms cubic-bezier(0.2,0.6,0.2,1); pointer-events: {{ detailPointer }}">
+          <!-- Key specs -->
+          <div style="background: #fff; border-radius: 20px; padding: 6px 16px; display: grid; grid-template-columns: 1fr 1fr; margin-top: 12px;">
+            <div style="padding: 14px 8px; text-align: center; border-right: 1px dashed var(--gray-300); border-bottom: 1px dashed var(--gray-300);">
+              <div style="font: 500 12px/1 var(--font-body); letter-spacing: 0.04em; color: var(--gray-600); display: flex; justify-content: center; gap: 4px;">MILEAGE</div>
+              <div style="font: 600 20px/1.2 var(--font-body); margin-top: 6px">32,520 mi</div>
+            </div>
+            <div style="padding: 14px 8px; text-align: center; border-bottom: 1px dashed var(--gray-300);">
+              <div style="font: 500 12px/1 var(--font-body); letter-spacing: 0.04em; color: var(--gray-600);">0-60 MPH</div>
+              <div style="font: 600 20px/1.2 var(--font-body); margin-top: 6px">3.8 secs</div>
+            </div>
+            <div style="padding: 14px 8px; text-align: center; border-right: 1px dashed var(--gray-300);">
+              <div style="font: 500 12px/1 var(--font-body); letter-spacing: 0.04em; color: var(--gray-600);">FUEL TYPE</div>
+              <div style="font: 600 20px/1.2 var(--font-body); margin-top: 6px">Hybrid</div>
+            </div>
+            <div style="padding: 14px 8px; text-align: center;">
+              <div style="font: 500 12px/1 var(--font-body); letter-spacing: 0.04em; color: var(--gray-600); display: flex; justify-content: center; gap: 4px; align-items: center;">DEALER RATING</div>
+              <div style="font: 600 20px/1.2 var(--font-body); margin-top: 6px">4.8</div>
+            </div>
+          </div>
+
+          <!-- Monthly payment -->
+          <div style="background: #fff; border-radius: 20px; padding: 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="font: 400 17px/1.3 var(--font-body);">Est. monthly payment*</div>
+              <div style="display: flex; align-items: flex-start; color: #0B6FE8; font-family: var(--font-body);">
+                <span style="font: 600 18px/1 var(--font-body); padding-top: 4px;">$</span>
+                <span style="font: 600 36px/1 var(--font-body);">529</span>
+                <span style="font: 600 22px/1 var(--font-body); align-self: flex-end;">/mo</span>
+              </div>
+              <button style="margin-top: 8px; align-self: flex-start; height: 44px; padding: 0 28px; border-radius: 999px; border: none; background: #E4F5FE; color: var(--cg-midnight); font: 600 16px/1 var(--font-body); cursor: pointer;">Edit payment</button>
+            </div>
+            <div style="width: 120px; height: 100px; position: relative; flex-shrink: 0;">
+              <image-slot id="vdp-calculator" src="assets/gallery/vdp-calculator.webp" shape="rounded" radius="12" fit="contain" placeholder="Calculator"></image-slot>
+            </div>
+          </div>
+
+          <!-- Features -->
+          <div style="border-radius: 0px; padding: 8px 0 16px; background: linear-gradient(160deg, #EEF1F6 0%, #F1EEF4 60%, #F7E9EC 100%); display: flex; flex-direction: column; align-items: center; gap: 14px; margin: 0 -16px">
+            <div style="width: 120px; height: 56px; position: relative">
+              <div style="position: absolute; inset: -25%;">
+                <image-slot id="vdp-keyfob" src="assets/gallery/vdp-keyfob.webp" transparent="" shape="rounded" radius="12" fit="contain" placeholder="Key"></image-slot>
+              </div>
+            </div>
+            <div style="font: 600 24px/1 var(--font-display); color: var(--cg-midnight);">Features</div>
+            <div class="vdp-tabs" style="display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; align-self: stretch; padding: 0 16px;">
+              <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+                <button onClick="{{ t.select }}" style="{{ t.style }}">{{ t.label }}</button>
+              </sc-for>
+            </div>
+            <div class="vdp-tabs" ref="{{ panesRef }}" onScroll="{{ onPaneScroll }}" style="opacity: {{ paneOpacity }}; transform: {{ paneShift }}; transition: opacity 160ms cubic-bezier(0.2,0.6,0.2,1), transform 200ms cubic-bezier(0.2,0.6,0.2,1); align-self: stretch; display: flex; align-items: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;">
+              <sc-for list="{{ panes }}" as="p" hint-placeholder-count="1">
+                <div style="flex: 0 0 100%; box-sizing: border-box; padding: 0 16px; scroll-snap-align: center; scroll-snap-stop: always;">
+                  <div style="background: #fff; border-radius: 16px; padding: 4px 16px;">
+                    <sc-for list="{{ p.rows }}" as="r" hint-placeholder-count="7">
+                      <div style="display: flex; align-items: center; gap: 10px; padding: 14px 0; border-bottom: {{ r.border }};">
+                        <span style="width: 18px; display: flex; justify-content: center; color: var(--gray-600);">{{ r.icon }}</span>
+                        <span style="flex: 1; font: 600 14px/1.2 var(--font-body);">{{ r.k }}</span>
+                        <span style="font: 400 14px/1.2 var(--font-body); color: var(--ink-900); text-align: right;">{{ r.v }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display: flex; gap: 6px; align-items: center;">
+              <sc-for list="{{ dots }}" as="d" hint-placeholder-count="3">
+                <span style="{{ d.style }}"></span>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- Vehicle history -->
+          <div style="background: #fff; border-radius: 20px; padding: 24px 20px 20px; display: flex; flex-direction: column;">
+            <div style="font: 600 24px/1 var(--font-display); color: var(--cg-midnight); text-align: center; margin-bottom: 12px;">Vehicle history</div>
+            <sc-for list="{{ history }}" as="h" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: {{ h.border }};">
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+                  <span style="font: 600 15px/1.3 var(--font-body);">{{ h.title }}</span>
+                  <span style="font: 400 14px/1.4 var(--font-body); color: var(--gray-600);">{{ h.sub }}</span>
+                </div>
+                <span style="width: 32px; height: 32px; border-radius: 50%; background: {{ h.bg }}; color: {{ h.fg }}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">{{ h.icon }}</span>
+              </div>
+            </sc-for>
+            <a href="#" style="margin-top: 14px; display: inline-flex; align-items: center; gap: 6px; font: 400 14px/1 var(--font-body); color: var(--cg-midnight);">
+              <span style="text-decoration: underline;">Save 20% on the AutoCheck report</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>
+            </a>
+          </div>
+
+          <!-- More ways carousel -->
+          <div style="margin: 12px -16px 0; position: relative; overflow: hidden; background: linear-gradient(135deg, #032E78 0%, #043A8E 55%, #05479E 100%); padding: 28px 0 24px; display: flex; flex-direction: column; gap: 20px;">
+            <div style="position: absolute; left: -40px; top: -60px; width: 300px; height: 300px; border-radius: 0 0 300px 0; background: rgba(0,0,73,0.22); pointer-events: none;"></div>
+            <div style="position: relative; padding: 0 22px; display: flex; flex-direction: column; gap: 12px;">
+              <img src="assets/cg-bug.svg" alt="CarGurus" style="height: 16px; width: auto; align-self: flex-start;">
+              <div style="font: 600 30px/1.05 var(--font-display); color: #fff; letter-spacing: -0.01em; text-wrap: pretty;">More ways <span style="color: var(--cg-blue);">CarGurus</span> can help you</div>
+              <div style="font: 400 15px/1.4 var(--font-body); color: #fff;">Check your financing options and see what your current car is worth before you talk to the dealer</div>
+            </div>
+            <div class="vdp-tabs" ref="{{ smcRef }}" onScroll="{{ onSmcScroll }}" style="position: relative; display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; padding: 0 22px; scroll-padding: 0 22px;">
+              <sc-for list="{{ smcTiles }}" as="t" hint-placeholder-count="4">
+                <div style="flex: 0 0 272px; height: 340px; border-radius: 22px; background: #fff; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; font: 600 22px/1 var(--font-body); color: var(--ink-900);">{{ t.label }}</div>
+              </sc-for>
+              <div style="flex: 0 0 14px;"></div>
+            </div>
+            <div style="position: relative; display: flex; justify-content: center; gap: 6px;">
+              <sc-for list="{{ smcDots }}" as="d" hint-placeholder-count="4">
+                <span onClick="{{ d.go }}" style="{{ d.style }}"></span>
+              </sc-for>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sticky CTA tray -->
+      <sc-if value="{{ isDocked }}" hint-placeholder-val="{{ true }}">
+      <div style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; background: #fff; border-radius: 24px 24px 0 0; box-shadow: 0 -6px 24px rgba(0,0,73,0.10); padding: 16px 16px 88px; display: flex; flex-direction: column; gap: 12px; transform: {{ trayTransform }}; opacity: {{ trayOpacity }}; transition: transform 240ms cubic-bezier(0.2,0.6,0.2,1), opacity 240ms cubic-bezier(0.2,0.6,0.2,1); pointer-events: {{ trayPointer }}">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+          <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
+            <div style="font: 400 15px/1.3 var(--font-body); color: var(--ink-900)">2026 Toyota 4Runner SR5 • 32.5k mi</div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font: 500 22px/1 var(--font-body); color: var(--ink-900)">$43,792</span>
+              <x-import component-from-global-scope="CarGurusDesignSystem_a90bbd.DealRating" rating="great" size="{{ 18 }}" style="{{ trayDealStyle }}" hint-size="110px,18px"></x-import>
+            </div>
+          </div>
+          <div style="display: flex; gap: 6px; flex-shrink: 0;">
+            <button aria-label="Share" style="width: 40px; height: 32px; border-radius: 16px; border: none; background: #fff; box-shadow: 0 2px 8px rgba(0,0,73,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-900)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5"></path><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"></path></svg>
+            </button>
+            <button aria-label="Save" onClick="{{ toggleSaved }}" style="width: 44px; height: 32px; border-radius: 16px; border: none; background: #fff; box-shadow: 0 2px 8px rgba(0,0,73,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="{{ heartFill }}" stroke="var(--cg-red)" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20.5s-8-4.9-8-11A4.5 4.5 0 0 1 12 6.6 4.5 4.5 0 0 1 20 9.5c0 6.1-8 11-8 11z"></path></svg>
+            </button>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <x-import component-from-global-scope="CarGurusDesignSystem_a90bbd.Button" variant="primary" full-width="{{ true }}" style="{{ trayCtaStyle }}" hint-size="100%,44px">Check availability</x-import>
+          <button style="height: 44px; border-radius: 999px; border: none; background: #E4F5FE; color: var(--cg-midnight); font: 500 15px/1 var(--font-body); cursor: pointer;">Finance &amp; Trade-in</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- Floating CTA tray -->
+      <sc-if value="{{ isFloating }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; left: 10px; right: 10px; bottom: 96px; z-index: 6; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 28px; box-shadow: 0 8px 28px rgba(0,0,73,0.14); padding: 16px; display: flex; flex-direction: column; gap: 14px; transform: {{ floatTransform }}; opacity: {{ trayOpacity }}; transition: transform 260ms cubic-bezier(0.2,0.6,0.2,1), opacity 260ms cubic-bezier(0.2,0.6,0.2,1); pointer-events: {{ trayPointer }};">
+        <div style="display: grid; grid-template-columns: 40px minmax(0,1fr) 40px; align-items: flex-start; gap: 8px;">
+          <button aria-label="Share" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: #fff; box-shadow: 0 2px 8px rgba(0,0,73,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-900)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5"></path><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"></path></svg>
+          </button>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; min-width: 0;">
+            <div style="font: 500 15px/1.3 var(--font-body); color: var(--ink-900);">2026 Toyota 4Runner SR5 • 32.5k mi</div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font: 700 24px/1 var(--font-body); color: var(--ink-900);">$43,792</span>
+              <x-import component-from-global-scope="CarGurusDesignSystem_a90bbd.DealRating" rating="great" size="{{ 18 }}" style="{{ trayDealStyle }}" hint-size="110px,18px"></x-import>
+            </div>
+          </div>
+          <button aria-label="Save" onClick="{{ toggleSaved }}" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: #fff; box-shadow: 0 2px 8px rgba(0,0,73,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="{{ heartFill }}" stroke="var(--cg-red)" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20.5s-8-4.9-8-11A4.5 4.5 0 0 1 12 6.6 4.5 4.5 0 0 1 20 9.5c0 6.1-8 11-8 11z"></path></svg>
+          </button>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <x-import component-from-global-scope="CarGurusDesignSystem_a90bbd.Button" variant="primary" full-width="{{ true }}" style="{{ trayCtaStyle }}" hint-size="100%,44px">Check availability</x-import>
+          <button style="height: 44px; border-radius: 999px; border: none; background: #E4F5FE; color: var(--cg-midnight); font: 500 15px/1 var(--font-body); cursor: pointer;">Finance &amp; Trade-in</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- Browser bar -->
+      <div style="position: absolute; left: 0; right: 0; bottom: 0; height: {{ urlFadeH }}; transition: height 240ms cubic-bezier(0.2,0.6,0.2,1); z-index: 4; background: linear-gradient(rgba(244,246,249,0), rgba(244,246,249,0.75) 55%); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); mask-image: linear-gradient(transparent, #000 45%); -webkit-mask-image: linear-gradient(transparent, #000 45%); pointer-events: none"></div>
+      <div onClick="{{ expandUrl }}" style="position: absolute; left: 12px; right: 12px; bottom: {{ urlBottom }}; transition: bottom 240ms cubic-bezier(0.2,0.6,0.2,1); z-index: 5; display: flex; gap: {{ urlGap }}; justify-content: center; align-items: center">
+        <div style="flex-shrink: 0; width: {{ urlSide }}; height: 44px; opacity: {{ urlSideOp }}; transform: scale({{ urlSideScale }}); overflow: hidden; transition: width 240ms cubic-bezier(0.2,0.6,0.2,1), opacity 160ms cubic-bezier(0.2,0.6,0.2,1), transform 240ms cubic-bezier(0.2,0.6,0.2,1); border-radius: 50%; background: rgba(255,255,255,0.85); backdrop-filter: blur(4px); box-shadow: 0 4px 8px rgba(0,0,73,0.12); display: flex; align-items: center; justify-content: center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ink-900)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+        </div>
+        <div style="flex: 1; min-width: 0; max-width: {{ urlPillMax }}; height: {{ urlPillH }}; padding: 0 {{ urlPillPad }}; font-size: {{ urlFont }}; transition: max-width 240ms cubic-bezier(0.2,0.6,0.2,1), height 240ms cubic-bezier(0.2,0.6,0.2,1), padding 240ms cubic-bezier(0.2,0.6,0.2,1), font-size 240ms cubic-bezier(0.2,0.6,0.2,1); border-radius: 25px; background: rgba(255,255,255,0.85); backdrop-filter: blur(4px); box-shadow: 0 4px 8px rgba(0,0,73,0.12); display: flex; align-items: center; justify-content: space-between; font-family: var(--font-body); font-weight: 400; line-height: 1; color: var(--ink-900); white-space: nowrap; overflow: hidden">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="flex-shrink: 0; width: {{ urlIcon }}; opacity: {{ urlSideOp }}; transition: width 240ms cubic-bezier(0.2,0.6,0.2,1), opacity 160ms cubic-bezier(0.2,0.6,0.2,1)"><rect x="4" y="4" width="16" height="9" rx="2"></rect><path d="M4 17h16M4 20.5h10"></path></svg>
+          <span style="flex: 1; text-align: center;">cargurus.com</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="flex-shrink: 0; width: {{ urlIcon }}; opacity: {{ urlSideOp }}; transition: width 240ms cubic-bezier(0.2,0.6,0.2,1), opacity 160ms cubic-bezier(0.2,0.6,0.2,1)"><path d="M19 12a7 7 0 1 1-2.1-5"></path><path d="M17 3v4h-4"></path></svg>
+        </div>
+        <div style="flex-shrink: 0; width: {{ urlSide }}; height: 44px; opacity: {{ urlSideOp }}; transform: scale({{ urlSideScale }}); overflow: hidden; transition: width 240ms cubic-bezier(0.2,0.6,0.2,1), opacity 160ms cubic-bezier(0.2,0.6,0.2,1), transform 240ms cubic-bezier(0.2,0.6,0.2,1); border-radius: 50%; background: rgba(255,255,255,0.85); backdrop-filter: blur(4px); box-shadow: 0 4px 8px rgba(0,0,73,0.12); display: flex; align-items: center; justify-content: center; gap: 4px">
+          <span style="width: 4px; height: 4px; border-radius: 50%; background: var(--ink-900);"></span>
+          <span style="width: 4px; height: 4px; border-radius: 50%; background: var(--ink-900);"></span>
+          <span style="width: 4px; height: 4px; border-radius: 50%; background: var(--ink-900);"></span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 10px; align-self: center; flex-shrink: 0;">
+    <div style="font: 600 12px/1 var(--font-body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-600);">CTA tray</div>
+    <div style="display: flex; flex-direction: column; gap: 4px; padding: 4px; background: #fff; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,73,0.08);">
+      <sc-for list="{{ trayModes }}" as="m" hint-placeholder-count="2">
+        <button onClick="{{ m.select }}" style="{{ m.style }}">{{ m.label }}</button>
+      </sc-for>
+    </div>
+    <div style="font: 600 12px/1 var(--font-body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-600); margin-top: 14px;">Sheet snap</div>
+    <div style="display: flex; flex-direction: column; gap: 4px; padding: 4px; background: #fff; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,73,0.08);">
+      <sc-for list="{{ snapModes }}" as="m" hint-placeholder-count="2">
+        <button onClick="{{ m.select }}" style="{{ m.style }}">{{ m.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const h = React.createElement;
+const ic = (d, extra) => h('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round' }, ...[].concat(d).map((p, i) => h('path', { key: i, d: p })), extra);
+const swatch = (c) => h('span', { style: { width: 14, height: 14, borderRadius: '50%', background: c, boxShadow: 'inset 0 0 0 1px #D8DBDE', display: 'block' } });
+const I = {
+  wheel: ic(['M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', 'M3.5 11h17', 'M12 14v7', 'M9 11a3 3 0 0 0 6 0']),
+  fuel: ic(['M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16', 'M3 21h12', 'M7 7h4', 'M14 10h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3']),
+  gauge: ic(['M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', 'M12 12l4-4', 'M7 15h10']),
+  engine: ic(['M4 10h3l2-2h5l2 3h2v-2h2v7h-2v-2h-2l-2 3H8l-2-2H4z', 'M2 11v4']),
+  gear: ic(['M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z', 'M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1']),
+  leaf: ic(['M5 19c0-8 5-14 15-14 0 10-6 15-14 15', 'M5 19l7-7']),
+  bolt: ic(['M13 2L4 14h7l-1 8 9-12h-7z']),
+  doc: ic(['M6 3h8l4 4v14H6z', 'M9 13l2 2 4-4']),
+  car: ic(['M3 14l2-5a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 5v4H3z', 'M7 18v2M17 18v2', 'M7 14h.01M17 14h.01']),
+  people: ic(['M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', 'M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', 'M2 20c0-3 3-5 6-5s6 2 6 5', 'M14 15.5c.6-.3 1.3-.5 2-.5 3 0 6 2 6 5']),
+};
+const TABS = [
+  { label: '🚙 Overview', rows: [
+    ['Exterior color', 'Metallica Metal', swatch('#F4F6F9')],
+    ['Interior color', 'Burgundy Magic', swatch('#5A2A27')],
+    ['Drivetrain', 'All-Wheel Drive', I.wheel],
+    ['Fuel type', 'Hybrid', I.fuel],
+    ['MPG', '28 City / 39 Highway', I.gauge],
+    ['Engine', '140 hp 1.8L I4', I.engine],
+    ['Transmission', '5-speed automatic', I.gear],
+  ]},
+  { label: '⛽ Fuel economy', rows: [
+    ['City', '28 mpg', I.gauge],
+    ['Highway', '39 mpg', I.gauge],
+    ['Combined', '32 mpg', I.gauge],
+    ['Fuel type', 'Hybrid', I.fuel],
+    ['Fuel tank', '17.2 gal', I.fuel],
+  ]},
+  { label: '🛞 Options', rows: [
+    ['Alloy wheels', 'Included', I.wheel],
+    ['Blind spot monitoring', 'Included', I.doc],
+    ['Heated seats', 'Included', I.car],
+    ['Navigation system', 'Included', I.gauge],
+    ['Sunroof / Moonroof', 'Included', I.car],
+    ['Apple CarPlay', 'Included', I.gear],
+  ]},
+  { label: 'Safety', rows: [
+    ['NHTSA overall', '★★★☆☆', I.doc],
+    ['NHTSA frontal crash', '★★★☆☆', I.doc],
+    ['NHTSA side crash', '★★★☆☆', I.doc],
+    ['NHTSA rollover', '★★★☆☆', I.doc],
+    ['ABS brakes', 'Included', I.wheel],
+    ['Bluetooth', 'Included', I.gear],
+  ]},
+  { label: 'Performance', rows: [
+    ['0-60 mph', '3.8 secs', I.bolt],
+    ['Horsepower', '140 hp', I.engine],
+    ['Drivetrain', 'All-Wheel Drive', I.wheel],
+    ['Transmission', '5-speed automatic', I.gear],
+  ]},
+];
+TABS.push({ label: 'Details', rows: [
+  ['VIN', 'YV4ED3GL8P2025509', I.doc],
+  ['Stock number', 'P10722', I.doc],
+  ['Condition', 'Certified Pre-Owned', I.doc],
+  ['Body type', 'SUV / Crossover', I.car],
+]});
+const HISTORY = [
+  { title: 'Clean title', sub: 'No issues reported.', icon: I.doc, bg: '#E3F6E4', fg: '#1E8C3A' },
+  { title: '1 accident reported', sub: 'No damage reported.', icon: I.car, bg: '#FFF4D6', fg: '#B07A00' },
+  { title: '3 previous owners', sub: 'Vehicle has 3 previous owners.', icon: I.people, bg: '#FFF4D6', fg: '#B07A00' },
+];
+const textIcon = h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinejoin: 'round' }, h('path', { d: 'M3 5h12v8H8l-3 3v-3H3z' }), h('path', { d: 'M15 9h6v8h-2v3l-3-3h-5v-4' }));
+const callIcon = h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinejoin: 'round' }, h('path', { d: 'M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z' }));
+
+class Component extends DCLogic {
+  state = { tab: 0, saved: true };
+  panesRef = React.createRef();
+  sheetRef = React.createRef();
+  ctaRef = React.createRef();
+  galleryRef = React.createRef();
+  smcRef = React.createRef();
+  trackUrl(y, key, max) {
+    const last = this[key] ?? y; this[key] = y;
+    const d = y - last;
+    if (y <= 4 || y >= max - 4) { if (this.state.urlMin) this.setState({ urlMin: false }); return; }
+    if (d > 6 && !this.state.urlMin) this.setState({ urlMin: true });
+    else if (d < -6 && this.state.urlMin) this.setState({ urlMin: false });
+  }
+  renderVals() {
+    const um = !!this.state.urlMin;
+    const { tab, saved } = this.state;
+    const rows = TABS[tab].rows;
+    const stuck = this.state.stuck;
+    return {
+      onScroll: (e) => {
+        const el = e.currentTarget;
+        this.trackUrl(el.scrollTop, 'ySheet', el.scrollHeight - el.clientHeight);
+        const s = el.scrollTop >= 442;
+        const cta = this.ctaRef.current;
+        const tray = cta ? cta.getBoundingClientRect().bottom < el.getBoundingClientRect().top + 24 : false;
+        if (s !== this.state.stuck || tray !== this.state.tray) this.setState({ stuck: s, tray });
+        if (this.state.collapsed && el.scrollTop > 0) this.setState({ collapsed: false });
+      },
+      snapType: this.state.snapOn ? 'y mandatory' : 'none',
+      ctaRef: this.ctaRef,
+      trayTransform: this.state.tray ? 'translateY(0)' : 'translateY(110%)',
+      smcRef: this.smcRef,
+      smcTiles: [1, 2, 3, 4].map(n => ({ label: 'SMC tile' })),
+      onSmcScroll: (e) => { const i = Math.round(e.currentTarget.scrollLeft / 280); if (i !== (this.state.smc || 0)) this.setState({ smc: i }); },
+      smcDots: [0, 1, 2, 3].map(i => {
+        const on = (this.state.smc || 0) === i;
+        return { go: () => { const el = this.smcRef.current; if (el) el.scrollTo({ left: i * 280, behavior: 'smooth' }); }, style: { height: 6, width: on ? 20 : 6, borderRadius: 3, background: on ? 'var(--cg-blue)' : 'rgba(255,255,255,0.85)', cursor: 'pointer', transition: 'width 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
+      }),
+      snapModes: [[false, 'Off'], [true, 'On']].map(([k, label]) => {
+        const on = !!this.state.snapOn === k;
+        return { label, select: () => this.setState({ snapOn: k }), style: { height: 40, padding: '0 18px', borderRadius: 12, border: 'none', cursor: 'pointer', textAlign: 'left', font: '500 15px/1 var(--font-body)', background: on ? 'var(--cg-midnight)' : 'transparent', color: on ? '#fff' : 'var(--ink-900)', transition: 'background 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
+      }),
+      galleryRef: this.galleryRef,
+      onGalleryScroll: (e) => {
+        const st = e.currentTarget.scrollTop, c = !!this.state.collapsed;
+        this.trackUrl(st, 'yGal', e.currentTarget.scrollHeight - e.currentTarget.clientHeight);
+        if (!c && st > 12 && !this.state.stuck) this.setState({ collapsed: true });
+        else if (c && st <= 2) this.setState({ collapsed: false });
+      },
+      expandSheet: () => { const g = this.galleryRef.current; if (g) g.scrollTo({ top: 0, behavior: 'smooth' }); this.setState({ collapsed: false }); },
+      detailOpacity: this.state.collapsed && !stuck ? 0 : 1,
+      detailPointer: this.state.collapsed && !stuck ? 'none' : 'auto',
+      isDocked: (this.state.trayMode || 'docked') === 'docked',
+      isFloating: this.state.trayMode === 'floating',
+      floatTransform: this.state.tray ? 'translateY(0)' : 'translateY(calc(100% + 120px))',
+      trayModes: [['docked', 'Docked tray'], ['floating', 'Floating tray']].map(([k, label]) => {
+        const on = (this.state.trayMode || 'docked') === k;
+        return { label, select: () => this.setState({ trayMode: k }), style: { height: 40, padding: '0 18px', borderRadius: 12, border: 'none', cursor: 'pointer', textAlign: 'left', font: '500 15px/1 var(--font-body)', background: on ? 'var(--cg-midnight)' : 'transparent', color: on ? '#fff' : 'var(--ink-900)', transition: 'background 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
+      }),
+      trayPointer: this.state.tray ? 'auto' : 'none',
+      trayOpacity: this.state.tray ? 1 : 0,
+      trayDealStyle: { font: '400 15px/1 var(--font-body)', color: 'var(--ink-900)', gap: 6 },
+      trayCtaStyle: { height: 44, fontSize: 15, background: 'linear-gradient(180deg, #0B6FE8, #0552BE)', boxShadow: '0 4px 12px rgba(7,99,211,0.25)' },
+      sheetRef: this.sheetRef,
+      fadeOpacity: stuck ? 1 : 0,
+      sheetRadius: '24px 24px 0 0',
+      gripCursor: 'pointer',
+      resetSheet: () => {
+        const el = this.sheetRef.current; if (!el) return;
+        const target = this.state.stuck ? 0 : 442;
+        this.snapping = true; this.rest = target;
+        el.scrollTo({ top: target, behavior: 'smooth' });
+        setTimeout(() => { this.snapping = false; }, 500);
+      },
+      capBg: stuck ? 'var(--cg-midnight)' : 'transparent',
+      galleryRepeats: [0, 1, 2, 3].map(n => ({ n })),
+      headerFade: 1,
+      heartFill: saved ? 'var(--cg-red)' : 'none',
+      toggleSaved: () => this.setState(s => ({ saved: !s.saved })),
+      dealStyle: { font: '300 16px/1 var(--font-body)', color: 'var(--cg-midnight)', gap: 8 },
+      ctaStyle: { height: 52, fontSize: 17, background: 'linear-gradient(180deg, #0B6FE8, #0552BE)', boxShadow: '0 4px 12px rgba(7,99,211,0.25)' },
+      softBtnProps: { style: { height: 44, maxHeight: 44, fontSize: 17, background: '#fff', border: 'none', boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.08)', color: '#0763D3' } },
+      textIcon, callIcon,
+      panesRef: this.panesRef,
+      urlFadeH: um ? '64px' : '100px', urlBottom: um ? '16px' : '32px', urlGap: um ? '0px' : '8px',
+      urlSide: um ? '0px' : '44px', urlSideOp: um ? 0 : 1, urlSideScale: um ? 0.6 : 1,
+      urlPillMax: um ? '150px' : '400px', urlPillH: um ? '32px' : '44px', urlPillPad: um ? '14px' : '16px',
+      urlFont: um ? '14px' : '16px', urlIcon: um ? '0px' : '18px',
+      expandUrl: () => { if (this.state.urlMin) this.setState({ urlMin: false }); },
+      paneOpacity: this.state.paneOut ? 0 : 1,
+      paneShift: 'translateX(' + (-(this.state.paneOut || 0) * 16) + 'px)',
+      onPaneScroll: (e) => { if (this.paneLock) return; const el = e.currentTarget; const i = Math.round(el.scrollLeft / el.clientWidth); if (i !== this.state.tab) this.setState({ tab: i }); },
+      panes: TABS.map(t => ({ rows: t.rows.map((r, i) => ({ k: r[0], v: r[1], icon: r[2], border: i === t.rows.length - 1 ? 'none' : '1px solid var(--fog)' })) })),
+      tabs: TABS.map((t, i) => ({
+        label: t.label,
+        select: () => { const el = this.panesRef.current; if (!el || i === tab) return; const dir = i > tab ? 1 : -1; this.paneLock = true; clearTimeout(this.paneT); this.setState({ tab: i, paneOut: dir }); this.paneT = setTimeout(() => { el.scrollTo({ left: i * el.clientWidth, behavior: 'auto' }); this.setState({ paneOut: -dir * 0.5 }); requestAnimationFrame(() => requestAnimationFrame(() => { this.setState({ paneOut: 0 }); this.paneLock = false; })); }, 140); },
+        style: { flexShrink: 0, height: 38, padding: '0 18px', borderRadius: 999, border: 'none', cursor: 'pointer', font: '500 15px/1 var(--font-body)', background: i === tab ? 'var(--cg-midnight)' : '#fff', color: i === tab ? '#fff' : 'var(--ink-900)', transition: 'background 160ms cubic-bezier(0.2,0.6,0.2,1)' },
+      })),
+      rows: rows.map((r, i) => ({ k: r[0], v: r[1], icon: r[2], border: i === rows.length - 1 ? 'none' : '1px solid var(--fog)' })),
+      dots: TABS.map((_, i) => ({ style: { height: 6, width: i === tab ? 20 : 6, borderRadius: 3, background: i === tab ? '#0763D3' : 'var(--gray-400)', transition: 'width 160ms' } })),
+      history: HISTORY.map((x, i) => ({ ...x, border: i === HISTORY.length - 1 ? '1px solid var(--fog)' : '1px solid var(--fog)' })),
+    };
+  }
+}
+</script>
+</body>
+</html>

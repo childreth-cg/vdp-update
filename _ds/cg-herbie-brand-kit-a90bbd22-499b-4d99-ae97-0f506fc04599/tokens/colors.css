@@ -1,0 +1,98 @@
+/* ============================================================
+   CarGurus — Color tokens
+   Primary brand: CG Red, CG Blue, Navy, Midnight.
+   Secondary palette is inspired by the signature Deal Rating colors.
+   Neutrals run on a cool, faintly-blue gray ramp ("livid").
+   ============================================================ */
+
+:root {
+  /* ---- Primary brand ---- */
+  --cg-red: #F5333F;       /* CG Red   — foundational */
+  --cg-blue: #0499FD;      /* CG Blue  — foundational */
+  --cg-navy: #05317B;      /* Navy     — trust, stability */
+  --cg-midnight: #000049;  /* Midnight — depth, headlines */
+
+  /* ---- Blue ramp ---- */
+  --blue-300: #E4F5FE;     /* Ice Blue — tints, surfaces */
+  --blue-400: #83C7EE;
+  --blue-500: #0499FD;     /* = CG Blue */
+  --blue-600: #0763D3;     /* Royal Blue — links, actions */
+  --blue-700: #044691;
+  --blue-800: #05317B;     /* = Navy */
+
+  /* ---- Red ramp ---- */
+  --red-300: #FFE2E2;
+  --red-500: #F5333F;      /* = CG Red */
+  --red-600: #DC1D34;
+  --red-700: #BD1A2E;
+
+  /* ---- Secondary (deal-rating inspired) ---- */
+  --green-500: #17C884;
+  --green-600: #078A0B;
+  --green-700: #006200;
+  --yellow-400: #FFE37D;
+  --yellow-500: #FFC651;
+  --orange-500: #FF612C;
+
+  /* ---- Neutrals (cool gray "livid" ramp) ---- */
+  --white: #FFFFFF;
+  --fog: #F4F6F9;          /* page-subtle surface */
+  --gray-200: #E4E4E5;
+  --gray-300: #D8DBDE;     /* hairline borders */
+  --gray-400: #98AEC7;     /* strong borders */
+  --gray-500: #79828D;     /* muted text */
+  --gray-600: #5E6976;     /* secondary text */
+  --ink-900: #0D1722;      /* near-black text */
+
+  /* ---- Gradients ---- */
+  --gradient-ai: linear-gradient(142deg, #F5333F -41%, #05317B 54%, #0763D3 112%); /* @kind color */
+  --gradient-ai-soft: linear-gradient(104deg, #FFE2E2 -54%, #E4F5FE 114%); /* @kind color */
+  --gradient-brand-blue: linear-gradient(180deg, #04A3FD 0%, #0763D3 100%); /* @kind color */
+  --gradient-pathway-navy: linear-gradient(-71deg, #044691 14%, #05317B 88%); /* @kind color */
+  --gradient-pathway-red: linear-gradient(180deg, #F5333F 0%, #B7061B 100%); /* @kind color */
+
+  /* ============================================================
+     Semantic aliases — reference these in components, not raw ramps
+     ============================================================ */
+
+  /* Text */
+  --text-primary: var(--ink-900);     /* product UI default */
+  --text-heading: var(--cg-midnight); /* brand headlines */
+  --text-secondary: var(--gray-600);
+  --text-muted: var(--gray-500);
+  --text-inverse: var(--white);
+  --text-link: var(--blue-600);
+  --text-brand: var(--cg-navy);
+
+  /* Surfaces */
+  --surface-page: var(--white);
+  --surface-subtle: var(--fog);
+  --surface-ice: var(--blue-300);
+  --surface-navy: var(--cg-navy);
+  --surface-midnight: var(--cg-midnight);
+
+  /* Borders */
+  --border-default: var(--gray-300);
+  --border-strong: var(--gray-400);
+  --border-focus: var(--blue-600);
+
+  /* Actions */
+  --action-primary: var(--blue-600);
+  --action-primary-hover: var(--blue-700);
+  --action-primary-active: var(--cg-navy);
+  --action-danger: var(--cg-red);
+  --action-on-action: var(--white);
+
+  /* Deal Rating — the signature CarGurus scale, best → worst */
+  --deal-great: var(--green-600);
+  --deal-good: var(--green-500);
+  --deal-fair: var(--yellow-500);
+  --deal-high: var(--orange-500);
+  --deal-over: var(--red-700);
+
+  /* Status */
+  --status-success: var(--green-600);
+  --status-warning: var(--yellow-500);
+  --status-error: var(--cg-red);
+  --status-info: var(--blue-600);
+}
