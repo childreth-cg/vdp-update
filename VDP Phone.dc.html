@@ -20,10 +20,10 @@
   <script src="./image-slot.js"></script>
   <style>
     html, body { margin: 0; width: 100%; min-height: 100%; background: #000049; }
-    html { overflow-x: clip; scroll-padding-top: var(--sheet-top, 68px); }
+    html { overflow-x: clip; scroll-padding-top: var(--sheet-top, 56px); }
     html.vdp-snap-enabled { scroll-snap-type: y proximity; }
     .vdp-phone {
-      --header-height: calc(56px + env(safe-area-inset-top, 0px));
+      --header-height: calc(44px + env(safe-area-inset-top, 0px));
       --sheet-peek: calc(100px + clamp(0px, calc(100vh - var(--header-height) - 272px), 442px));
       --sheet-peek: calc(100px + clamp(0px, calc(100svh - var(--header-height) - 272px), 442px));
       position: relative; width: 100%; min-height: 100vh; min-height: 100svh; scroll-snap-align: start;
@@ -78,8 +78,7 @@
 
       <!-- Header -->
       <div style="position: fixed; left: 0; right: 0; top: 0; height: var(--header-height); background: rgba(0,0,73,0.8); z-index: 7; pointer-events: none;">
-        <div style="position: absolute; left: 0; right: 0; top: 100%; height: 32px; background: linear-gradient(rgba(0,0,73,0.8), rgba(0,0,73,0.45) 45%, rgba(0,0,73,0)); opacity: {{ headerFade }}; transition: opacity 160ms cubic-bezier(0.2,0.6,0.2,1);"></div>
-        <div style="height: 56px; margin-top: env(safe-area-inset-top, 0px); display: flex; align-items: center; justify-content: space-between; padding: 0 max(8px, env(safe-area-inset-right, 0px)) 0 max(8px, env(safe-area-inset-left, 0px)); pointer-events: auto;">
+        <div style="height: 44px; box-sizing: border-box; margin-top: env(safe-area-inset-top, 0px); display: flex; align-items: center; justify-content: space-between; padding: 12px max(8px, env(safe-area-inset-right, 0px)) 0 max(8px, env(safe-area-inset-left, 0px)); pointer-events: auto;">
           <button aria-label="Open prototype settings" aria-haspopup="dialog" onClick="{{ openSettings }}" style="width: 40px; height: 32px; border-radius: 16px; border: 1.5px solid var(--cg-blue); background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
           </button>
@@ -91,6 +90,9 @@
           </button>
         </div>
       </div>
+
+      <!-- Gallery fade sits below the sheet so it cannot tint sheet content. -->
+      <div style="position: fixed; left: 0; right: 0; top: var(--header-height); height: 27px; z-index: 3; pointer-events: none; background: linear-gradient(rgba(0,0,73,0.8), rgba(0,0,73,0.45) 45%, rgba(0,0,73,0));"></div>
 
       <!-- Scrolling sheet -->
       <div class="vdp-sheet" ref="{{ sheetRef }}">
@@ -521,7 +523,6 @@ class Component extends DCLogic {
       },
       capBg: stuck ? 'var(--cg-midnight)' : 'transparent',
       galleryRepeats: [0, 1, 2, 3].map(n => ({ n })),
-      headerFade: 1,
       heartFill: saved ? 'var(--cg-red)' : 'none',
       toggleSaved: () => this.setState(s => ({ saved: !s.saved })),
       dealStyle: { font: '300 16px/1 var(--font-body)', color: 'var(--cg-midnight)', gap: 8 },
