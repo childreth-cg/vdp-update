@@ -33,6 +33,7 @@
     .sheet-spacer { height: var(--sheet-peek); pointer-events: none; }
     /* Let swipes on photos reach their native scroll container. */
     .vdp-phone image-slot::part(image) { touch-action: auto; }
+    .vdp-phone image-slot::part(ring) { display: none; }
     .vdp-scroll, .vdp-tabs { -webkit-overflow-scrolling: touch; }
     /* The sheet participates in document scrolling; its empty area passes touches to the gallery. */
     .vdp-sheet { position: relative; z-index: 4; padding-top: calc(var(--header-height) + 12px); pointer-events: none; }
