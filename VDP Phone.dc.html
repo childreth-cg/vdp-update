@@ -19,21 +19,23 @@
   <script src="_ds/cg-herbie-brand-kit-a90bbd22-499b-4d99-ae97-0f506fc04599/_ds_bundle.js"></script>
   <script src="./image-slot.js"></script>
   <style>
-    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000049; }
+    html, body { margin: 0; width: 100%; min-height: 100%; background: #000049; }
+    html { overflow-x: clip; scroll-padding-top: var(--sheet-top, 68px); }
+    html.vdp-snap-enabled { scroll-snap-type: y proximity; }
     .vdp-phone {
       --header-height: calc(56px + env(safe-area-inset-top, 0px));
       --sheet-peek: calc(100px + clamp(0px, calc(100vh - var(--header-height) - 272px), 442px));
-      --sheet-peek: calc(100px + clamp(0px, calc(100dvh - var(--header-height) - 272px), 442px));
-      position: relative; width: 100%; height: 100vh; height: 100dvh;
-      overflow: hidden; background: var(--cg-midnight);
+      --sheet-peek: calc(100px + clamp(0px, calc(100svh - var(--header-height) - 272px), 442px));
+      position: relative; width: 100%; min-height: 100vh; min-height: 100svh; scroll-snap-align: start;
+      background: var(--cg-midnight);
       font-family: var(--font-body); color: var(--ink-900);
     }
-    .sheet-spacer { height: var(--sheet-peek); scroll-snap-align: start; }
+    .sheet-spacer { height: var(--sheet-peek); pointer-events: none; }
     /* Let swipes on photos reach their native scroll container. */
     .vdp-phone image-slot::part(image) { touch-action: auto; }
     .vdp-scroll, .vdp-tabs { -webkit-overflow-scrolling: touch; }
-    /* Clip the transparent spacer out of hit testing, not the sheet's pointer events. */
-    .vdp-sheet { clip-path: inset(max(0px, calc(var(--sheet-peek) - var(--sheet-scroll, 0px))) 0 0 round 24px 24px 0 0); }
+    /* The sheet participates in document scrolling; its empty area passes touches to the gallery. */
+    .vdp-sheet { position: relative; z-index: 4; padding-top: calc(var(--header-height) + 12px); pointer-events: none; }
     .prototype-settings { width: min(360px, calc(100% - 32px)); max-height: calc(100dvh - 48px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); box-sizing: border-box; padding: 0; border: 0; border-radius: 24px; background: var(--fog); color: var(--ink-900); font-family: var(--font-body); box-shadow: 0 16px 64px rgba(0,0,0,0.3); overscroll-behavior: contain; }
     .prototype-settings::backdrop { background: rgba(0,0,30,0.55); }
     .settings-content { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
@@ -58,7 +60,7 @@
 <div class="vdp-phone" data-screen-label="VDP">
 
       <!-- Gallery (behind sheet) -->
-      <div class="vdp-scroll" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; padding-top: var(--header-height); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; display: flex; flex-direction: column; gap: 4px; padding-bottom: 340px; box-sizing: border-box;">
+      <div class="vdp-scroll" style="position: fixed; left: 0; right: 0; top: 0; bottom: 0; padding-top: var(--header-height); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; display: flex; flex-direction: column; gap: 4px; padding-bottom: 340px; box-sizing: border-box;">
         <div style="height: 248px; flex-shrink: 0; position: relative;">
           <image-slot id="vdp-hero" src="assets/gallery/vdp-hero.webp" shape="rounded" radius="10" placeholder="Hero vehicle photo"></image-slot>
         </div>
@@ -74,7 +76,7 @@
       </div>
 
       <!-- Header -->
-      <div style="position: absolute; left: 0; right: 0; top: 0; height: var(--header-height); background: rgba(0,0,73,0.8); z-index: 3; pointer-events: none;">
+      <div style="position: fixed; left: 0; right: 0; top: 0; height: var(--header-height); background: rgba(0,0,73,0.8); z-index: 7; pointer-events: none;">
         <div style="position: absolute; left: 0; right: 0; top: 100%; height: 32px; background: linear-gradient(rgba(0,0,73,0.8), rgba(0,0,73,0.45) 45%, rgba(0,0,73,0)); opacity: {{ headerFade }}; transition: opacity 160ms cubic-bezier(0.2,0.6,0.2,1);"></div>
         <div style="height: 56px; margin-top: env(safe-area-inset-top, 0px); display: flex; align-items: center; justify-content: space-between; padding: 0 max(8px, env(safe-area-inset-right, 0px)) 0 max(8px, env(safe-area-inset-left, 0px)); pointer-events: auto;">
           <button aria-label="Open prototype settings" aria-haspopup="dialog" onClick="{{ openSettings }}" style="width: 40px; height: 32px; border-radius: 16px; border: 1.5px solid var(--cg-blue); background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0">
@@ -90,9 +92,9 @@
       </div>
 
       <!-- Scrolling sheet -->
-      <div class="vdp-scroll vdp-sheet" ref="{{ sheetRef }}" onScroll="{{ onScroll }}" style="position: absolute; left: 0; right: 0; top: calc(var(--header-height) + 12px); bottom: 0; scroll-snap-type: {{ snapType }}; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; z-index: 4; pointer-events: auto">
+      <div class="vdp-sheet" ref="{{ sheetRef }}">
         <div class="sheet-spacer" ref="{{ spacerRef }}"></div>
-        <div style="position: sticky; top: 0; z-index: 2; height: 0; pointer-events: none">
+        <div style="position: sticky; top: calc(var(--header-height) + 12px); z-index: 2; height: 0; pointer-events: none">
           <div style="position: absolute; left: 0; right: 0; top: 0; height: 28px; pointer-events: none; border-radius: 24px 24px 0 0; background: linear-gradient(var(--fog), rgba(244,246,249,0)); opacity: {{ fadeOpacity }}; transition: opacity 160ms cubic-bezier(0.2,0.6,0.2,1)"></div>
           <div onClick="{{ resetSheet }}" style="position: absolute; left: 0; right: 0; top: 0; height: 20px; display: flex; justify-content: center; padding-top: 8px; box-sizing: border-box; pointer-events: auto; cursor: {{ gripCursor }}">
             <span style="width: 36px; height: 5px; border-radius: 3px; background: var(--gray-300);"></span>
@@ -267,7 +269,7 @@
 
       <!-- Sticky CTA tray -->
       <sc-if value="{{ isDocked }}" hint-placeholder-val="{{ true }}">
-      <div style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; background: #fff; border-radius: 24px 24px 0 0; box-shadow: 0 -6px 24px rgba(0,0,73,0.10); padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 12px; transform: {{ trayTransform }}; opacity: {{ trayOpacity }}; transition: transform 240ms cubic-bezier(0.2,0.6,0.2,1), opacity 240ms cubic-bezier(0.2,0.6,0.2,1); pointer-events: {{ trayPointer }}">
+      <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 4; background: #fff; border-radius: 24px 24px 0 0; box-shadow: 0 -6px 24px rgba(0,0,73,0.10); padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 12px; transform: {{ trayTransform }}; opacity: {{ trayOpacity }}; transition: transform 240ms cubic-bezier(0.2,0.6,0.2,1), opacity 240ms cubic-bezier(0.2,0.6,0.2,1); pointer-events: {{ trayPointer }}">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
           <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
             <div style="font: 400 15px/1.3 var(--font-body); color: var(--ink-900)">2026 Toyota 4Runner SR5 • 32.5k mi</div>
@@ -294,7 +296,7 @@
 
       <!-- Floating CTA tray -->
       <sc-if value="{{ isFloating }}" hint-placeholder-val="{{ false }}">
-      <div style="position: absolute; left: 10px; right: 10px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 6; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 28px; box-shadow: 0 8px 28px rgba(0,0,73,0.14); padding: 16px; display: flex; flex-direction: column; gap: 14px; transform: {{ floatTransform }}; opacity: {{ trayOpacity }}; transition: transform 260ms cubic-bezier(0.2,0.6,0.2,1), opacity 260ms cubic-bezier(0.2,0.6,0.2,1); pointer-events: {{ trayPointer }};">
+      <div style="position: fixed; left: 10px; right: 10px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 6; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 28px; box-shadow: 0 8px 28px rgba(0,0,73,0.14); padding: 16px; display: flex; flex-direction: column; gap: 14px; transform: {{ floatTransform }}; opacity: {{ trayOpacity }}; transition: transform 260ms cubic-bezier(0.2,0.6,0.2,1), opacity 260ms cubic-bezier(0.2,0.6,0.2,1); pointer-events: {{ trayPointer }};">
         <div style="display: grid; grid-template-columns: 40px minmax(0,1fr) 40px; align-items: flex-start; gap: 8px;">
           <button aria-label="Share" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: #fff; box-shadow: 0 2px 8px rgba(0,0,73,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-900)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5"></path><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"></path></svg>
@@ -427,6 +429,37 @@ class Component extends DCLogic {
   smcRef = React.createRef();
   settingsRef = React.createRef();
   spacerRef = React.createRef();
+  componentDidMount() {
+    this.onPageScroll = () => this.updatePageScroll();
+    window.addEventListener('scroll', this.onPageScroll, { passive: true });
+    window.addEventListener('resize', this.onPageScroll, { passive: true });
+    this.updatePageScroll();
+    this.syncPageSnap();
+  }
+  componentDidUpdate() {
+    this.syncPageSnap();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onPageScroll);
+    window.removeEventListener('resize', this.onPageScroll);
+    document.documentElement.classList.remove('vdp-snap-enabled');
+    document.documentElement.style.removeProperty('--sheet-top');
+  }
+  pageSheetTop() {
+    const sheet = this.sheetRef.current;
+    return sheet ? parseFloat(window.getComputedStyle(sheet).paddingTop) || 0 : 0;
+  }
+  syncPageSnap() {
+    document.documentElement.classList.toggle('vdp-snap-enabled', !!this.state.snapOn);
+  }
+  updatePageScroll() {
+    const top = this.pageSheetTop();
+    document.documentElement.style.setProperty('--sheet-top', top + 'px');
+    const stuck = window.scrollY >= (this.spacerRef.current?.offsetHeight || 0);
+    const cta = this.ctaRef.current;
+    const tray = cta ? cta.getBoundingClientRect().bottom < top + 24 : false;
+    if (stuck !== this.state.stuck || tray !== this.state.tray) this.setState({ stuck, tray });
+  }
   scrollToFeature(index) {
     const el = this.panesRef.current;
     if (!el || !el.clientWidth) return;
@@ -448,15 +481,6 @@ class Component extends DCLogic {
     const rows = TABS[tab].rows;
     const stuck = this.state.stuck;
     return {
-      onScroll: (e) => {
-        const el = e.currentTarget;
-        el.style.setProperty('--sheet-scroll', Math.max(0, el.scrollTop) + 'px');
-        const s = el.scrollTop >= (this.spacerRef.current?.offsetHeight || 0);
-        const cta = this.ctaRef.current;
-        const tray = cta ? cta.getBoundingClientRect().bottom < el.getBoundingClientRect().top + 24 : false;
-        if (s !== this.state.stuck || tray !== this.state.tray) this.setState({ stuck: s, tray });
-      },
-      snapType: this.state.snapOn ? 'y mandatory' : 'none',
       settingsRef: this.settingsRef,
       spacerRef: this.spacerRef,
       openSettings: () => this.settingsRef.current?.showModal(),
@@ -491,11 +515,8 @@ class Component extends DCLogic {
       sheetRadius: '24px 24px 0 0',
       gripCursor: 'pointer',
       resetSheet: () => {
-        const el = this.sheetRef.current; if (!el) return;
         const target = this.state.stuck ? 0 : (this.spacerRef.current?.offsetHeight || 0);
-        this.snapping = true; this.rest = target;
-        el.scrollTo({ top: target, behavior: 'smooth' });
-        setTimeout(() => { this.snapping = false; }, 500);
+        window.scrollTo({ top: target, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
       },
       capBg: stuck ? 'var(--cg-midnight)' : 'transparent',
       galleryRepeats: [0, 1, 2, 3].map(n => ({ n })),
