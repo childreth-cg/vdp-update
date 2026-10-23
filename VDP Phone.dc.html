@@ -22,8 +22,8 @@
     html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000049; }
     .vdp-phone {
       --header-height: calc(56px + env(safe-area-inset-top, 0px));
-      --sheet-peek: clamp(0px, calc(100vh - var(--header-height) - 272px), 442px);
-      --sheet-peek: clamp(0px, calc(100dvh - var(--header-height) - 272px), 442px);
+      --sheet-peek: calc(100px + clamp(0px, calc(100vh - var(--header-height) - 272px), 442px));
+      --sheet-peek: calc(100px + clamp(0px, calc(100dvh - var(--header-height) - 272px), 442px));
       position: relative; width: 100%; height: 100vh; height: 100dvh;
       overflow: hidden; background: var(--cg-midnight);
       font-family: var(--font-body); color: var(--ink-900);
