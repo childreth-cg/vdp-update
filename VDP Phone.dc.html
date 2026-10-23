@@ -36,7 +36,7 @@
     .vdp-phone image-slot::part(ring) { display: none; }
     .vdp-scroll, .vdp-tabs { -webkit-overflow-scrolling: touch; }
     /* The sheet participates in document scrolling; its empty area passes touches to the gallery. */
-    .vdp-sheet { position: relative; z-index: 4; padding-top: calc(var(--header-height) + 12px); pointer-events: none; clip-path: inset(var(--sheet-clip-top, 0px) 0 0 round 24px 24px 0 0); }
+    .vdp-sheet { position: relative; z-index: 4; padding-top: calc(var(--header-height) + 12px); pointer-events: none; }
     .prototype-settings { width: min(360px, calc(100% - 32px)); max-height: calc(100dvh - 48px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); box-sizing: border-box; padding: 0; border: 0; border-radius: 24px; background: var(--fog); color: var(--ink-900); font-family: var(--font-body); box-shadow: 0 16px 64px rgba(0,0,0,0.3); overscroll-behavior: contain; }
     .prototype-settings::backdrop { background: rgba(0,0,30,0.55); }
     .settings-content { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
@@ -93,6 +93,14 @@
 
       <!-- Gallery fade sits below the sheet so it cannot tint sheet content. -->
       <div style="position: fixed; left: 0; right: 0; top: var(--header-height); height: 27px; z-index: 3; pointer-events: none; background: linear-gradient(rgba(0,0,73,0.8), rgba(0,0,73,0.45) 45%, rgba(0,0,73,0));"></div>
+
+      <!-- Stationary cover for the docked sheet; native page scrolling stays unmasked. -->
+      <sc-if value="{{ sheetDocked }}" hint-placeholder-val="{{ false }}">
+        <div aria-hidden="true" style="position: fixed; left: 0; right: 0; top: 0; height: calc(var(--header-height) + 12px); z-index: 5; background: var(--cg-midnight); pointer-events: none;">
+          <svg width="24" height="24" viewBox="0 0 24 24" style="position: absolute; left: 0; top: 100%; display: block;" fill="var(--cg-midnight)"><path d="M0 0H24A24 24 0 0 0 0 24Z"></path></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" style="position: absolute; right: 0; top: 100%; display: block;" fill="var(--cg-midnight)"><path d="M0 0H24V24A24 24 0 0 0 0 0Z"></path></svg>
+        </div>
+      </sc-if>
 
       <!-- Scrolling sheet -->
       <div class="vdp-sheet" ref="{{ sheetRef }}">
@@ -457,11 +465,6 @@ class Component extends DCLogic {
   }
   updatePageScroll() {
     const top = this.pageSheetTop();
-    const sheet = this.sheetRef.current;
-    if (sheet) {
-      const clipTop = Math.max(0, top - sheet.getBoundingClientRect().top);
-      sheet.style.setProperty('--sheet-clip-top', clipTop + 'px');
-    }
     document.documentElement.style.setProperty('--sheet-top', top + 'px');
     const stuck = window.scrollY >= (this.spacerRef.current?.offsetHeight || 0);
     const cta = this.ctaRef.current;
@@ -519,6 +522,7 @@ class Component extends DCLogic {
       trayDealStyle: { font: '400 15px/1 var(--font-body)', color: 'var(--ink-900)', gap: 6 },
       trayCtaStyle: { height: 44, fontSize: 15, background: 'linear-gradient(180deg, #0B6FE8, #0552BE)', boxShadow: '0 4px 12px rgba(7,99,211,0.25)' },
       sheetRef: this.sheetRef,
+      sheetDocked: !!stuck,
       sheetRadius: '24px 24px 0 0',
       gripCursor: 'pointer',
       resetSheet: () => {
