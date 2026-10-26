@@ -136,7 +136,9 @@
       <div class="vdp-sheet" ref="{{ sheetRef }}" onTouchStart="{{ beginSheetScroll }}" onPointerDown="{{ beginSheetScroll }}" onWheel="{{ beginSheetScroll }}">
         <div class="sheet-spacer" ref="{{ spacerRef }}"></div>
         <div style="position: sticky; top: calc(var(--header-height) + 12px); z-index: 2; height: 0; pointer-events: none">
+          <sc-if value="{{ grabberOverflow }}" hint-placeholder-val="{{ false }}">
           <div style="position: absolute; left: 0; right: 0; top: 0; height: var(--sheet-radius); pointer-events: none; border-radius: var(--sheet-radius) var(--sheet-radius) 0 0; background: rgba(244,246,249,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);"></div>
+          </sc-if>
           <div onClick="{{ resetSheet }}" style="position: absolute; left: 0; right: 0; top: 0; height: 20px; display: flex; justify-content: center; padding-top: 8px; box-sizing: border-box; pointer-events: auto; cursor: {{ gripCursor }}">
             <span style="width: 36px; height: 5px; border-radius: 3px; background: #79828D;"></span>
           </div>
@@ -516,16 +518,18 @@ class Component extends DCLogic {
   updatePageScroll() {
     const top = this.pageSheetTop();
     document.documentElement.style.setProperty('--sheet-top', top + 'px');
-    const stuck = window.scrollY >= (this.spacerRef.current?.offsetHeight || 0);
+    const snapTop = this.spacerRef.current?.offsetHeight || 0;
+    const stuck = window.scrollY >= snapTop;
+    const grabberOverflow = window.scrollY > snapTop + 1;
     const cta = this.ctaRef.current;
     const tray = cta ? cta.getBoundingClientRect().bottom < top + 24 : false;
     if (tray !== this.state.tray) {
       clearTimeout(this.trayExitTimer);
       const trayExiting = !tray && !!this.state.tray && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      this.setState({ stuck, tray, trayExiting });
+      this.setState({ stuck, tray, trayExiting, grabberOverflow });
       // Fallback if the browser cancels or skips animationend.
       if (trayExiting) this.trayExitTimer = setTimeout(() => this.finishTrayExit(), 180);
-    } else if (stuck !== this.state.stuck) this.setState({ stuck });
+    } else if (stuck !== this.state.stuck || grabberOverflow !== this.state.grabberOverflow) this.setState({ stuck, grabberOverflow });
   }
   finishTrayExit() {
     if (this.state.tray || !this.state.trayExiting) return;
@@ -589,6 +593,7 @@ class Component extends DCLogic {
       trayCtaStyle: { height: 44, fontSize: 15, background: 'linear-gradient(180deg, #0B6FE8, #0552BE)', boxShadow: '0 4px 12px rgba(7,99,211,0.25)' },
       sheetRef: this.sheetRef,
       sheetDocked: !!stuck,
+      grabberOverflow: !!this.state.grabberOverflow,
       gripCursor: 'pointer',
       resetSheet: () => {
         this.beginSheetScroll();
