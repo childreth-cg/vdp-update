@@ -43,11 +43,44 @@
       pointer-events: none;
       background: radial-gradient(circle, var(--gray-300) 0.7px, transparent 0.85px) center / 2px 4px repeat-y;
     }
+    /* Desktop wireframes adapted to the phone sheet. */
+    .mobile-wireframes { display: flex; flex-direction: column; gap: 18px; background: #fff; margin: 0 -16px; padding: 18px 16px; }
+    .mobile-wireframes, .mobile-wireframes * { box-sizing: border-box; }
+    .mobile-wireframes .wire { background: #f3f5f8; color: #78838f; }
+    .mobile-wireframes .content-block, .mobile-wireframes .wide-block { border-radius: 20px; padding: 24px; }
+    .mobile-wireframes h2 { font: 500 20px/1.3 var(--font-body); text-align: center; margin: 0 0 28px; color: #7a8591; }
+    .mobile-wireframes .content-block h2::before { content: ''; display: block; width: 24px; height: 3px; margin: 0 auto 14px; background: #d9dfe5; }
+    .mobile-wireframes .skeleton-row { height: 66px; border-bottom: 1px dashed #dce2e7; position: relative; }
+    .mobile-wireframes .skeleton-row::before, .mobile-wireframes .skeleton-row::after, .mobile-wireframes .skeleton-line { content: ''; display: block; background: #e1e6ec; height: 9px; width: 48%; border-radius: 8px; }
+    .mobile-wireframes .skeleton-row::before { position: absolute; top: 19px; }
+    .mobile-wireframes .skeleton-row::after { position: absolute; top: 38px; width: 70%; opacity: .65; }
+    .mobile-wireframes .skeleton-line { width: 80%; margin: 22px auto; }
+    .mobile-wireframes .skeleton-line.short { width: 50%; }
+    .mobile-wireframes .history { min-height: 340px; }
+    .mobile-wireframes .deal-builder { min-height: 150px; }
+    .mobile-wireframes .details { min-height: 740px; }
+    .mobile-wireframes .guru-block { min-height: 270px; }
+    .mobile-wireframes .display-ad { height: 180px; display: grid; place-items: center; background: #fff; border: 1px solid #e5e9ed; }
+    .mobile-wireframes .display-ad h2 { margin: 0; }
+    .mobile-wireframes .display-ad h2::before { display: none; }
+    .mobile-wireframes .skeleton-table { height: 425px; background: repeating-linear-gradient(to bottom, transparent 0 41px, #dfe5eb 41px 42px); }
+    .mobile-wireframes .wire-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 28px; }
+    .mobile-wireframes .wire-pills i { height: 28px; background: #e3e7ed; border-radius: 30px; }
+    .mobile-wireframes .pricing { min-height: 390px; }
+    .mobile-wireframes .chart-placeholder { width: 65%; aspect-ratio: 2; border: 20px solid #e0e6ec; border-bottom: 0; border-radius: 200px 200px 0 0; margin: 36px auto; }
+    .mobile-wireframes .financing { min-height: 180px; }
+    .mobile-wireframes .wire-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .mobile-wireframes .wire-cards > div { height: 150px; border-radius: 18px; background: #fff; border: 1px solid #e1e6eb; }
+    .mobile-wireframes .subscribe { padding: 24px; border-radius: 18px; }
+    .mobile-wireframes .subscribe h2, .mobile-wireframes .dealer h2 { margin: 0; }
+    .mobile-wireframes .dealer { height: 440px; display: grid; place-items: center; }
+    .mobile-wireframes .recommendations { padding-top: 50px; padding-bottom: 50px; }
+    .mobile-wireframes .mobile-footer { padding: 50px 24px; border-radius: 20px; text-align: center; }
     .sheet-spacer { height: var(--sheet-peek); pointer-events: none; }
     /* Let swipes on photos reach their native scroll container. */
     .vdp-phone image-slot::part(image) { touch-action: auto; }
     .vdp-phone image-slot::part(ring) { display: none; }
-    .vdp-scroll, .vdp-tabs { -webkit-overflow-scrolling: touch; }
+    .vdp-scroll { -webkit-overflow-scrolling: touch; }
     /* The sheet participates in document scrolling; its empty area passes touches to the gallery. */
     .vdp-sheet { position: relative; z-index: 4; padding-top: calc(var(--header-height) + 12px); pointer-events: none; }
     .gallery-header-cover {
@@ -85,7 +118,7 @@
     button:focus-visible { outline: 3px solid var(--cg-blue); outline-offset: 3px; }
     a { color: var(--cg-navy); }
     a:hover { color: var(--cg-midnight); }
-    .vdp-scroll::-webkit-scrollbar, .vdp-tabs::-webkit-scrollbar { display: none; }
+    .vdp-scroll::-webkit-scrollbar { display: none; }
   </style>
 </helmet>
 
@@ -245,78 +278,20 @@
             </div>
           </div>
 
-          <!-- Features -->
-          <div style="border-radius: 0px; padding: 8px 0 16px; background: linear-gradient(160deg, #EEF1F6 0%, #F1EEF4 60%, #F7E9EC 100%); display: flex; flex-direction: column; align-items: center; gap: 14px; margin: 0 -16px">
-            <div style="width: 120px; height: 56px; position: relative">
-              <div style="position: absolute; inset: -25%;">
-                <image-slot id="vdp-keyfob" src="assets/gallery/vdp-keyfob.webp" transparent="" shape="rounded" radius="12" fit="contain" placeholder="Key"></image-slot>
-              </div>
-            </div>
-            <div style="font: 600 24px/1 var(--font-display); color: var(--cg-midnight);">Features</div>
-            <div class="vdp-tabs" ref="{{ featureTabsRef }}" style="display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; align-self: stretch; padding: 0 16px;">
-              <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
-                <button aria-pressed="{{ t.selected }}" onClick="{{ t.select }}" style="{{ t.style }}">{{ t.label }}</button>
-              </sc-for>
-            </div>
-            <div class="vdp-tabs" ref="{{ panesRef }}" onScroll="{{ onPaneScroll }}" onKeyDown="{{ onPaneKeyDown }}" tabIndex="0" role="region" aria-label="Vehicle features" aria-roledescription="carousel" style="touch-action: pan-x pan-y pinch-zoom; align-self: stretch; display: flex; align-items: stretch; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;">
-              <sc-for list="{{ panes }}" as="p" hint-placeholder-count="1">
-                <div style="flex: 0 0 100%; min-width: 0; display: flex; flex-direction: column; box-sizing: border-box; padding: 0 16px; scroll-snap-align: start; scroll-snap-stop: always;">
-                  <div style="flex: 1; background: #fff; border-radius: 16px; padding: 4px 16px;">
-                    <sc-for list="{{ p.rows }}" as="r" hint-placeholder-count="7">
-                      <div style="display: flex; align-items: center; gap: 10px; padding: 14px 0; border-bottom: {{ r.border }};">
-                        <span style="width: 18px; display: flex; justify-content: center; color: var(--gray-600);">{{ r.icon }}</span>
-                        <span style="flex: 1; font: 600 14px/1.2 var(--font-body);">{{ r.k }}</span>
-                        <span style="font: 400 14px/1.2 var(--font-body); color: var(--ink-900); text-align: right;">{{ r.v }}</span>
-                      </div>
-                    </sc-for>
-                  </div>
-                </div>
-              </sc-for>
-            </div>
-            <div style="display: flex; gap: 6px; align-items: center;">
-              <sc-for list="{{ dots }}" as="d" hint-placeholder-count="3">
-                <span style="{{ d.style }}"></span>
-              </sc-for>
-            </div>
-          </div>
-
-          <!-- Vehicle history -->
-          <div style="background: #fff; border-radius: 20px; padding: 24px 20px 20px; display: flex; flex-direction: column;">
-            <div style="font: 600 24px/1 var(--font-display); color: var(--cg-midnight); text-align: center; margin-bottom: 12px;">Vehicle history</div>
-            <sc-for list="{{ history }}" as="h" hint-placeholder-count="3">
-              <div style="display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: {{ h.border }};">
-                <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
-                  <span style="font: 600 15px/1.3 var(--font-body);">{{ h.title }}</span>
-                  <span style="font: 400 14px/1.4 var(--font-body); color: var(--gray-600);">{{ h.sub }}</span>
-                </div>
-                <span style="width: 32px; height: 32px; border-radius: 50%; background: {{ h.bg }}; color: {{ h.fg }}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">{{ h.icon }}</span>
-              </div>
-            </sc-for>
-            <a href="#" style="margin-top: 14px; display: inline-flex; align-items: center; gap: 6px; font: 400 14px/1 var(--font-body); color: var(--cg-midnight);">
-              <span style="text-decoration: underline;">Save 20% on the AutoCheck report</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>
-            </a>
-          </div>
-
-          <!-- More ways carousel -->
-          <div style="margin: 12px -16px 0; position: relative; overflow: hidden; background: linear-gradient(135deg, #032E78 0%, #043A8E 55%, #05479E 100%); padding: 28px 0 24px; display: flex; flex-direction: column; gap: 20px;">
-            <div style="position: absolute; left: -40px; top: -60px; width: 300px; height: 300px; border-radius: 0 0 300px 0; background: rgba(0,0,73,0.22); pointer-events: none;"></div>
-            <div style="position: relative; padding: 0 22px; display: flex; flex-direction: column; gap: 12px;">
-              <img src="assets/cg-bug.svg" alt="CarGurus" style="height: 16px; width: auto; align-self: flex-start;">
-              <div style="font: 600 30px/1.05 var(--font-display); color: #fff; letter-spacing: -0.01em; text-wrap: pretty;">More ways <span style="color: var(--cg-blue);">CarGurus</span> can help you</div>
-              <div style="font: 400 15px/1.4 var(--font-body); color: #fff;">Check your financing options and see what your current car is worth before you talk to the dealer</div>
-            </div>
-            <div class="vdp-tabs" ref="{{ smcRef }}" onScroll="{{ onSmcScroll }}" style="position: relative; display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; padding: 0 22px; scroll-padding: 0 22px;">
-              <sc-for list="{{ smcTiles }}" as="t" hint-placeholder-count="4">
-                <div style="flex: 0 0 272px; height: 340px; border-radius: 22px; background: #fff; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; font: 600 22px/1 var(--font-body); color: var(--ink-900);">{{ t.label }}</div>
-              </sc-for>
-              <div style="flex: 0 0 14px;"></div>
-            </div>
-            <div style="position: relative; display: flex; justify-content: center; gap: 6px;">
-              <sc-for list="{{ smcDots }}" as="d" hint-placeholder-count="4">
-                <span onClick="{{ d.go }}" style="{{ d.style }}"></span>
-              </sc-for>
-            </div>
+          <!-- Wireframe content from the desktop prototype -->
+          <div class="mobile-wireframes">
+            <section class="wire content-block history"><h2>History</h2><div class="skeleton-row"></div><div class="skeleton-row"></div><div class="skeleton-row"></div><div class="skeleton-line short"></div></section>
+            <section class="wire content-block deal-builder"><h2>Build your deal</h2><div class="skeleton-line"></div><div class="skeleton-line short"></div></section>
+            <section class="wire content-block details"><h2>Vehicle details</h2><div class="skeleton-table" aria-hidden="true"></div><div class="skeleton-row"></div><div class="skeleton-row"></div><div class="skeleton-row"></div></section>
+            <section class="wire content-block guru-block"><h2>Ask Guru</h2><div class="skeleton-line"></div><div class="skeleton-line short"></div><div class="wire-pills" aria-hidden="true"><i></i><i></i><i></i><i></i></div></section>
+            <section class="wire content-block display-ad"><h2>Ad display</h2></section>
+            <section class="wire content-block pricing"><h2>Pricing intelligence</h2><div class="chart-placeholder" aria-hidden="true"></div><div class="skeleton-row"></div><div class="skeleton-row"></div></section>
+            <section class="wire content-block financing"><h2>Financing options</h2><div class="skeleton-line"></div><div class="skeleton-line short"></div></section>
+            <section class="wire wide-block better-deal"><h2>More ways to get a better deal</h2><div class="wire-cards" aria-hidden="true"><div></div><div></div><div></div><div></div></div></section>
+            <section class="wire subscribe"><h2>Subscribe</h2></section>
+            <section class="wire wide-block dealer"><h2>Dealer block</h2></section>
+            <section class="wire wide-block recommendations"><h2>Recommended from this dealer</h2><div class="wire-cards" aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></section>
+            <footer class="wire mobile-footer">Footer</footer>
           </div>
           </div>
         </div>
@@ -407,83 +382,15 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 const h = React.createElement;
-const ic = (d, extra) => h('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round' }, ...[].concat(d).map((p, i) => h('path', { key: i, d: p })), extra);
-const swatch = (c) => h('span', { style: { width: 14, height: 14, borderRadius: '50%', background: c, boxShadow: 'inset 0 0 0 1px #D8DBDE', display: 'block' } });
-const I = {
-  wheel: ic(['M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', 'M3.5 11h17', 'M12 14v7', 'M9 11a3 3 0 0 0 6 0']),
-  fuel: ic(['M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16', 'M3 21h12', 'M7 7h4', 'M14 10h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3']),
-  gauge: ic(['M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', 'M12 12l4-4', 'M7 15h10']),
-  engine: ic(['M4 10h3l2-2h5l2 3h2v-2h2v7h-2v-2h-2l-2 3H8l-2-2H4z', 'M2 11v4']),
-  gear: ic(['M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z', 'M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1']),
-  leaf: ic(['M5 19c0-8 5-14 15-14 0 10-6 15-14 15', 'M5 19l7-7']),
-  bolt: ic(['M13 2L4 14h7l-1 8 9-12h-7z']),
-  doc: ic(['M6 3h8l4 4v14H6z', 'M9 13l2 2 4-4']),
-  car: ic(['M3 14l2-5a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 5v4H3z', 'M7 18v2M17 18v2', 'M7 14h.01M17 14h.01']),
-  people: ic(['M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', 'M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', 'M2 20c0-3 3-5 6-5s6 2 6 5', 'M14 15.5c.6-.3 1.3-.5 2-.5 3 0 6 2 6 5']),
-};
-const TABS = [
-  { label: '🚙 Overview', rows: [
-    ['Exterior color', 'Metallica Metal', swatch('#F4F6F9')],
-    ['Interior color', 'Burgundy Magic', swatch('#5A2A27')],
-    ['Drivetrain', 'All-Wheel Drive', I.wheel],
-    ['Fuel type', 'Hybrid', I.fuel],
-    ['MPG', '28 City / 39 Highway', I.gauge],
-    ['Engine', '140 hp 1.8L I4', I.engine],
-    ['Transmission', '5-speed automatic', I.gear],
-  ]},
-  { label: '⛽ Fuel economy', rows: [
-    ['City', '28 mpg', I.gauge],
-    ['Highway', '39 mpg', I.gauge],
-    ['Combined', '32 mpg', I.gauge],
-    ['Fuel type', 'Hybrid', I.fuel],
-    ['Fuel tank', '17.2 gal', I.fuel],
-  ]},
-  { label: '🛞 Options', rows: [
-    ['Alloy wheels', 'Included', I.wheel],
-    ['Blind spot monitoring', 'Included', I.doc],
-    ['Heated seats', 'Included', I.car],
-    ['Navigation system', 'Included', I.gauge],
-    ['Sunroof / Moonroof', 'Included', I.car],
-    ['Apple CarPlay', 'Included', I.gear],
-  ]},
-  { label: 'Safety', rows: [
-    ['NHTSA overall', '★★★☆☆', I.doc],
-    ['NHTSA frontal crash', '★★★☆☆', I.doc],
-    ['NHTSA side crash', '★★★☆☆', I.doc],
-    ['NHTSA rollover', '★★★☆☆', I.doc],
-    ['ABS brakes', 'Included', I.wheel],
-    ['Bluetooth', 'Included', I.gear],
-  ]},
-  { label: 'Performance', rows: [
-    ['0-60 mph', '3.8 secs', I.bolt],
-    ['Horsepower', '140 hp', I.engine],
-    ['Drivetrain', 'All-Wheel Drive', I.wheel],
-    ['Transmission', '5-speed automatic', I.gear],
-  ]},
-];
-TABS.push({ label: 'Details', rows: [
-  ['VIN', 'YV4ED3GL8P2025509', I.doc],
-  ['Stock number', 'P10722', I.doc],
-  ['Condition', 'Certified Pre-Owned', I.doc],
-  ['Body type', 'SUV / Crossover', I.car],
-]});
-const HISTORY = [
-  { title: 'Clean title', sub: 'No issues reported.', icon: I.doc, bg: '#E3F6E4', fg: '#1E8C3A' },
-  { title: '1 accident reported', sub: 'No damage reported.', icon: I.car, bg: '#FFF4D6', fg: '#B07A00' },
-  { title: '3 previous owners', sub: 'Vehicle has 3 previous owners.', icon: I.people, bg: '#FFF4D6', fg: '#B07A00' },
-];
 const textIcon = h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinejoin: 'round' }, h('path', { d: 'M3 5h12v8H8l-3 3v-3H3z' }), h('path', { d: 'M15 9h6v8h-2v3l-3-3h-5v-4' }));
 const callIcon = h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinejoin: 'round' }, h('path', { d: 'M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z' }));
 
 class Component extends DCLogic {
-  state = { tab: 0, saved: true, snapOn: true };
-  panesRef = React.createRef();
-  featureTabsRef = React.createRef();
+  state = { saved: true, snapOn: true };
   sheetRef = React.createRef();
   galleryRef = React.createRef();
   galleryCoverRef = React.createRef();
   ctaRef = React.createRef();
-  smcRef = React.createRef();
   settingsRef = React.createRef();
   spacerRef = React.createRef();
   componentDidMount() {
@@ -548,25 +455,8 @@ class Component extends DCLogic {
     clearTimeout(this.trayExitTimer);
     this.setState({ trayExiting: false });
   }
-  scrollToFeature(index) {
-    const el = this.panesRef.current;
-    if (!el || !el.clientWidth) return;
-    const target = Math.max(0, Math.min(TABS.length - 1, index));
-    el.scrollTo({ left: target * el.clientWidth, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-  }
-  revealFeatureTab(index) {
-    const strip = this.featureTabsRef.current;
-    const button = strip?.querySelectorAll('button')[index];
-    if (!button) return;
-    const container = strip.getBoundingClientRect();
-    const item = button.getBoundingClientRect();
-    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-    if (item.left < container.left + 16) strip.scrollBy({ left: item.left - container.left - 16, behavior });
-    else if (item.right > container.right - 16) strip.scrollBy({ left: item.right - container.right + 16, behavior });
-  }
   renderVals() {
-    const { tab, saved } = this.state;
-    const rows = TABS[tab].rows;
+    const { saved } = this.state;
     const stuck = this.state.stuck;
     return {
       galleryRef: this.galleryRef,
@@ -580,13 +470,6 @@ class Component extends DCLogic {
       closeSettings: () => this.settingsRef.current?.close(),
       dismissSettingsBackdrop: (e) => { if (e.target === this.settingsRef.current) this.settingsRef.current.close(); },
       ctaRef: this.ctaRef,
-      smcRef: this.smcRef,
-      smcTiles: [1, 2, 3, 4].map(n => ({ label: 'SMC tile' })),
-      onSmcScroll: (e) => { const i = Math.round(e.currentTarget.scrollLeft / 280); if (i !== (this.state.smc || 0)) this.setState({ smc: i }); },
-      smcDots: [0, 1, 2, 3].map(i => {
-        const on = (this.state.smc || 0) === i;
-        return { go: () => { const el = this.smcRef.current; if (el) el.scrollTo({ left: i * 280, behavior: 'smooth' }); }, style: { height: 6, width: on ? 20 : 6, borderRadius: 3, background: on ? 'var(--cg-blue)' : 'rgba(255,255,255,0.85)', cursor: 'pointer', transition: 'width 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
-      }),
       snapModes: [[false, 'Off'], [true, 'On']].map(([k, label]) => {
         const on = !!this.state.snapOn === k;
         return { label, selected: on, select: () => this.setState({ snapOn: k }), style: { minHeight: 44, padding: '0 18px', borderRadius: 12, border: 'none', cursor: 'pointer', textAlign: 'left', font: '500 15px/1 var(--font-body)', background: on ? 'var(--cg-midnight)' : 'transparent', color: on ? '#fff' : 'var(--ink-900)', transition: 'background 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
@@ -620,32 +503,7 @@ class Component extends DCLogic {
       ctaStyle: { height: 52, fontSize: 17, background: 'linear-gradient(180deg, #0B6FE8, #0552BE)', boxShadow: '0 4px 12px rgba(7,99,211,0.25)' },
       softBtnProps: { style: { height: 44, maxHeight: 44, fontSize: 17, background: '#fff', border: 'none', boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.08)', color: '#0763D3' } },
       textIcon, callIcon,
-      panesRef: this.panesRef,
-      featureTabsRef: this.featureTabsRef,
-      onPaneScroll: (e) => {
-        const el = e.currentTarget;
-        if (!el.clientWidth) return;
-        const index = Math.max(0, Math.min(TABS.length - 1, Math.round(el.scrollLeft / el.clientWidth)));
-        if (index !== this.state.tab) {
-          this.setState({ tab: index });
-          this.revealFeatureTab(index);
-        }
-      },
-      onPaneKeyDown: (e) => {
-        const targets = { ArrowLeft: this.state.tab - 1, ArrowRight: this.state.tab + 1, Home: 0, End: TABS.length - 1 };
-        if (!(e.key in targets)) return;
-        e.preventDefault();
-        this.scrollToFeature(targets[e.key]);
-      },
-      panes: TABS.map(t => ({ rows: t.rows.map((r, i) => ({ k: r[0], v: r[1], icon: r[2], border: i === t.rows.length - 1 ? 'none' : '1px solid var(--fog)' })) })),
-      tabs: TABS.map((t, i) => ({
-        label: t.label, selected: i === tab,
-        select: () => this.scrollToFeature(i),
-        style: { flexShrink: 0, height: 38, padding: '0 18px', borderRadius: 999, border: 'none', cursor: 'pointer', font: '500 15px/1 var(--font-body)', background: i === tab ? 'var(--cg-midnight)' : '#fff', color: i === tab ? '#fff' : 'var(--ink-900)', transition: 'background-color 200ms cubic-bezier(0.2,0.6,0.2,1), color 200ms cubic-bezier(0.2,0.6,0.2,1)' },
-      })),
-      rows: rows.map((r, i) => ({ k: r[0], v: r[1], icon: r[2], border: i === rows.length - 1 ? 'none' : '1px solid var(--fog)' })),
-      dots: TABS.map((_, i) => ({ style: { height: 6, width: i === tab ? 20 : 6, borderRadius: 3, background: i === tab ? '#0763D3' : 'var(--gray-400)', transition: 'width 160ms' } })),
-      history: HISTORY.map((x, i) => ({ ...x, border: i === HISTORY.length - 1 ? '1px solid var(--fog)' : '1px solid var(--fog)' })),
+
     };
   }
 }
