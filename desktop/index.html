@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CarGurus — Desktop scroll prototype</title>
+  <link rel="stylesheet" href="../_ds/cg-herbie-brand-kit-a90bbd22-499b-4d99-ae97-0f506fc04599/tokens/fonts.css">
+  <link rel="stylesheet" href="desktop.css">
+  <script defer src="vendor/gsap.min.js"></script>
+  <script defer src="vendor/ScrollTrigger.min.js"></script>
+  <script defer src="desktop.js"></script>
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="tag" viewBox="0 0 24 24"><path d="M3 3h8l10 10-8 8L3 11Z"/><path d="m15 3 8 8-2 2"/><circle cx="7" cy="7" r="1"/></symbol>
+    <symbol id="calculator" viewBox="0 0 24 24"><rect x="5" y="1" width="14" height="22" rx="2"/><path d="M8 5h8M8 9h1m3 0h1m3 0h1M8 13h1m3 0h1m3 0h1M8 17h1m3 0h1m3 0h1"/></symbol>
+    <symbol id="pin" viewBox="0 0 24 24"><path d="M20 9c0 6-8 13-8 13S4 15 4 9a8 8 0 0 1 16 0Z"/><circle cx="12" cy="9" r="3"/></symbol>
+    <symbol id="gauge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m12 12 4-5M5 12h1m12 0h1M8 5l1 1m-2 12 1-1m9 1-1-1M12 3v2"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="trailer" viewBox="0 0 24 24"><path d="M2 3h16v13H8M5 6v6m4-6v6m4-6v6m5 4h5M2 3v13"/><circle cx="5" cy="17" r="3"/><path d="M12 16v4h5"/></symbol>
+    <symbol id="plug" viewBox="0 0 24 24"><path d="M8 2v5m8-5v5M5 7h14M7 7v5a5 5 0 0 0 10 0V7m-5 10v5"/></symbol>
+    <symbol id="star" viewBox="0 0 24 24"><path d="m12 2 3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1Z"/></symbol>
+    <symbol id="phone" viewBox="0 0 24 24"><path d="m5 2 4 1 1 5-3 2a16 16 0 0 0 7 7l2-3 5 1 1 4c-1 6-10 2-15-3S-1 3 5 2Z"/></symbol>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M20 12H4m8-8-8 8 8 8"/></symbol>
+  </svg>
+  <header class="site-nav">
+    <img src="../assets/cargurus-wordmark.svg" alt="CarGurus" width="145">
+    <div class="nav-wire" aria-label="Navigation placeholder"><span>Shop</span><span>Sell</span><span>Finance</span><span>Research</span></div>
+    <span class="nav-account wire" aria-label="Account placeholder"></span>
+  </header>
+  <div class="ad-area wire">Ad area</div>
+
+  <aside class="product-bar" aria-label="Vehicle quick actions" aria-hidden="true" inert>
+    <div class="product-bar-content">
+      <button class="back-to-top" aria-label="Back to listing summary"><svg class="icon"><use href="#arrow"/></svg></button>
+      <div class="product-info"><strong>2026 Toyota 4Runner SR5 4WD <span>· 32,520 mi</span></strong><div><b>$44,494</b> <span class="compact-deal">↗ Great Deal</span> <span class="saving">$1,967 below market</span></div></div>
+      <img class="bar-logo" src="../assets/cargurus-wordmark.svg" alt="CarGurus" width="128">
+      <div class="bar-actions"><button class="button guru" data-dialog="Ask Guru"><img src="../assets/sparkle.svg" alt=""> <span>Ask Guru</span></button><button class="button primary" data-dialog="Check availability">Check availability</button></div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="breadcrumb"><span class="breadcrumb-arrow">←</span> <span class="breadcrumb-label">All Results (1,024)</span></div>
+    <div class="listing-layout">
+      <aside class="gallery-column" aria-label="Vehicle gallery">
+        <div class="gallery-sticky">
+          <div class="gallery-image wire"><img class="gallery-hero" src="../assets/gallery/desktop-tacoma-hero.jpeg" alt="Gray Toyota Tacoma parked outside a Toyota dealership" width="1024" height="768" fetchpriority="high"><span class="gallery-count">1 of 18</span><span class="photo-label">View all photos</span><div class="gallery-tools"><span>↥</span><span>♡</span></div></div>
+          <div class="gallery-thumbnails" aria-label="Photo placeholders"><div class="wire selected">01</div><div class="wire">02</div><div class="wire">03</div><div class="wire">04</div><div class="wire">05</div><div class="wire">06</div><div class="wire">07</div></div>
+          <div class="app-banner" aria-hidden="true" inert><img src="../assets/cg-bug.svg" alt="" width="40"><div><strong>Introducing dealership mode</strong><p>Compare cars and estimate all-in prices at the dealership. <button class="text-link" data-dialog="CarGurus app">Learn more</button></p></div><div class="banner-art wire" aria-hidden="true">CarGurus app</div></div>
+        </div>
+      </aside>
+
+      <div class="listing-content">
+        <section class="listing-summary" aria-labelledby="vehicle-title">
+          <h1 id="vehicle-title">2026 Toyota 4Runner SR5 4WD</h1>
+          <div class="price-row"><button class="price" data-dialog="Pricing">$44,494</button><button class="fees text-link" data-dialog="Includes fees"><svg class="icon"><use href="#tag"/></svg>Includes fees</button></div>
+          <div class="deal-row"><span class="deal-icon">↗</span><strong>Great Deal</strong><b>$1,967 below market</b></div>
+          <div class="finance-row"><button class="text-link" data-dialog="Get prequalified"><svg class="icon"><use href="#calculator"/></svg>Get prequalified</button><span class="dot">•</span><span>Est. $529/mo</span><span class="location"><svg class="icon"><use href="#pin"/></svg>Burlington, MA</span></div>
+          <dl class="key-specs">
+            <div><dt>Mileage <svg class="icon blue"><use href="#gauge"/></svg></dt><dd>32,520 mi</dd></div>
+            <div><dt>Towing <svg class="icon bronze"><use href="#trailer"/></svg></dt><dd>5,500 lbs</dd></div>
+            <div><dt>Fuel type <svg class="icon green"><use href="#plug"/></svg></dt><dd>Hybrid</dd></div>
+            <div><dt>Dealer rating <svg class="icon blue"><use href="#star"/></svg></dt><dd>4.8</dd></div>
+          </dl>
+          <div class="listing-ctas"><button class="button primary" data-dialog="Check availability">Check availability</button><div class="secondary-actions"><button class="button" data-dialog="Call"><svg class="icon"><use href="#phone"/></svg>Call</button><button class="button guru" data-dialog="Ask Guru"><img src="../assets/sparkle.svg" alt=""><span>Ask Guru</span></button></div></div>
+        </section>
+        <section class="wire content-block history"><h2>History</h2><div class="skeleton-row"></div><div class="skeleton-row"></div><div class="skeleton-row"></div><div class="skeleton-line short"></div></section>
+        <section class="wire content-block deal-builder"><h2>Build your deal</h2><div class="skeleton-line"></div><div class="skeleton-line short"></div></section>
+        <section class="wire content-block details"><h2>Vehicle details</h2><div class="skeleton-table" aria-hidden="true"></div><div class="skeleton-row"></div><div class="skeleton-row"></div><div class="skeleton-row"></div></section>
+        <section class="wire content-block guru-block"><h2>Ask Guru</h2><div class="skeleton-line"></div><div class="skeleton-line short"></div><div class="wire-pills" aria-hidden="true"><i></i><i></i><i></i><i></i></div></section>
+        <section class="wire content-block display-ad"><h2>Ad display</h2></section>
+        <section class="wire content-block pricing"><h2>Pricing intelligence</h2><div class="chart-placeholder" aria-hidden="true"></div><div class="skeleton-row"></div><div class="skeleton-row"></div></section>
+        <section class="wire content-block financing"><h2>Financing options</h2><div class="skeleton-line"></div><div class="skeleton-line short"></div></section>
+      </div>
+    </div>
+    <div class="lower-sections">
+      <section class="wire wide-block better-deal"><h2>More ways to get a better deal</h2><div class="wire-cards" aria-hidden="true"><div></div><div></div><div></div><div></div></div></section>
+      <section class="wire subscribe"><h2>Subscribe</h2></section>
+      <section class="wire wide-block dealer"><h2>Dealer block</h2></section>
+      <section class="wire wide-block recommendations"><h2>Recommended from this dealer</h2><div class="wire-cards" aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></section>
+    </div>
+  </main>
+  <footer class="wire">Footer</footer>
+  <dialog class="placeholder-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><h2></h2><p>This section is a wireframe for now.</p><div class="skeleton-row"></div><div class="skeleton-row"></div></dialog>
+</body>
+</html>
