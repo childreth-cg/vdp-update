@@ -31,6 +31,18 @@
       background: var(--cg-midnight);
       font-family: var(--font-body); color: var(--ink-900);
     }
+    .key-specs { position: relative; }
+    .key-specs > div { position: relative; }
+    .key-specs::after {
+      content: ''; position: absolute; left: 16px; right: 16px; top: 50%; height: 2px;
+      transform: translateY(-50%); pointer-events: none;
+      background: radial-gradient(circle, var(--gray-300) 0.7px, transparent 0.85px) center / 4px 2px repeat-x;
+    }
+    .key-specs > div:nth-child(odd)::after {
+      content: ''; position: absolute; top: 8px; bottom: 8px; right: -1px; width: 2px;
+      pointer-events: none;
+      background: radial-gradient(circle, var(--gray-300) 0.7px, transparent 0.85px) center / 2px 4px repeat-y;
+    }
     .sheet-spacer { height: var(--sheet-peek); pointer-events: none; }
     /* Let swipes on photos reach their native scroll container. */
     .vdp-phone image-slot::part(image) { touch-action: auto; }
@@ -198,16 +210,16 @@
 
           <div style="display: flex; flex-direction: column; gap: 12px;">
           <!-- Key specs -->
-          <div style="background: #fff; border-radius: 20px; padding: 6px 16px; display: grid; grid-template-columns: 1fr 1fr; margin-top: 12px;">
-            <div style="padding: 14px 8px; text-align: center; border-right: 1px dashed var(--gray-300); border-bottom: 1px dashed var(--gray-300);">
+          <div class="key-specs" style="background: #fff; border-radius: 20px; padding: 6px 16px; display: grid; grid-template-columns: 1fr 1fr; margin-top: 12px;">
+            <div style="padding: 14px 8px; text-align: center;">
               <div style="font: 500 12px/1 var(--font-body); letter-spacing: 0.04em; color: var(--gray-600); display: flex; justify-content: center; gap: 4px;">MILEAGE</div>
               <div style="font: 600 20px/1.2 var(--font-body); margin-top: 6px">32,520 mi</div>
             </div>
-            <div style="padding: 14px 8px; text-align: center; border-bottom: 1px dashed var(--gray-300);">
+            <div style="padding: 14px 8px; text-align: center;">
               <div style="font: 500 12px/1 var(--font-body); letter-spacing: 0.04em; color: var(--gray-600);">0-60 MPH</div>
               <div style="font: 600 20px/1.2 var(--font-body); margin-top: 6px">3.8 secs</div>
             </div>
-            <div style="padding: 14px 8px; text-align: center; border-right: 1px dashed var(--gray-300);">
+            <div style="padding: 14px 8px; text-align: center;">
               <div style="font: 500 12px/1 var(--font-body); letter-spacing: 0.04em; color: var(--gray-600);">FUEL TYPE</div>
               <div style="font: 600 20px/1.2 var(--font-body); margin-top: 6px">Hybrid</div>
             </div>
