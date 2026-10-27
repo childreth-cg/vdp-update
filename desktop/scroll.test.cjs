@@ -22,11 +22,11 @@ test('desktop scroll choreography, reverse, resize, reduced motion, and fallback
   };
   const metrics = () => page.evaluate(() => {
     const rect = selector => {
-      const { top, bottom, height } = document.querySelector(selector).getBoundingClientRect();
-      return { top, bottom, height };
+      const { top, bottom, height, width } = document.querySelector(selector).getBoundingClientRect();
+      return { top, bottom, height, width };
     };
     return {
-      y: scrollY, gallery: rect('.gallery-sticky'), summary: rect('.listing-summary'),
+      y: scrollY, gallery: rect('.gallery-sticky'), hero: rect('.gallery-image'), thumbnails: rect('.gallery-thumbnails'), summary: rect('.listing-summary'),
       ctas: rect('.listing-ctas'), layout: rect('.listing-layout'), ad: rect('.ad-area'),
       barVisible: !document.querySelector('.product-bar').inert,
       bannerVisible: !document.querySelector('.app-banner').inert,
@@ -38,7 +38,7 @@ test('desktop scroll choreography, reverse, resize, reduced motion, and fallback
     };
   });
 
-  for (const viewport of [{ width: 1440, height: 1000 }, { width: 1982, height: 1248 }, { width: 1100, height: 768 }]) {
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 1982, height: 1248 }, { width: 1100, height: 768 }, { width: 1440, height: 680 }]) {
     await t.test(`${viewport.width}×${viewport.height}: initial movement and CTA handoff`, async () => {
       await page.setViewportSize(viewport);
       await scroll(0);
@@ -47,6 +47,7 @@ test('desktop scroll choreography, reverse, resize, reduced motion, and fallback
       assert.equal(initial.barVisible, false);
       assert.equal(initial.bannerVisible, false);
       assert.equal(initial.overflow, false);
+      assert.ok(Math.abs(initial.hero.width - initial.thumbnails.width) < 1, 'hero fills the gallery width even when height is constrained');
       await scroll(40);
       const early = await metrics();
       assert.ok(Math.abs(initial.gallery.top - early.gallery.top - 40) < 2, 'gallery initially follows document');
