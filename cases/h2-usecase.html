@@ -1,0 +1,358 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}</style><style>:root{color-scheme:light dark;--md-bg:#fff;--md-text:rgba(0,0,0,.8);--md-muted:rgba(0,0,0,.6);--md-fill:rgba(0,0,0,.04);--md-fill-strong:rgba(0,0,0,.06);--md-rule:rgba(0,0,0,.1);--md-rule-strong:rgba(0,0,0,.16);--md-link:hsl(210 100% 45%)}@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){--md-bg:#0d0d0d;--md-text:rgba(255,255,255,.85);--md-muted:rgba(255,255,255,.6);--md-fill:rgba(255,255,255,.06);--md-fill-strong:rgba(255,255,255,.09);--md-rule:rgba(255,255,255,.14);--md-rule-strong:rgba(255,255,255,.22);--md-link:hsl(210 100% 72%)}}:root[data-theme="dark"]{color-scheme:dark;--md-bg:#0d0d0d;--md-text:rgba(255,255,255,.85);--md-muted:rgba(255,255,255,.6);--md-fill:rgba(255,255,255,.06);--md-fill-strong:rgba(255,255,255,.09);--md-rule:rgba(255,255,255,.14);--md-rule-strong:rgba(255,255,255,.22);--md-link:hsl(210 100% 72%)}:root[data-theme="light"]{color-scheme:light}@media print{:root,:root[data-theme="dark"]{color-scheme:light;--md-bg:#fff;--md-text:rgba(0,0,0,.8);--md-muted:rgba(0,0,0,.6);--md-fill:rgba(0,0,0,.04);--md-fill-strong:rgba(0,0,0,.06);--md-rule:rgba(0,0,0,.1);--md-rule-strong:rgba(0,0,0,.16);--md-link:hsl(210 100% 45%)}}body{background:var(--md-bg);color:var(--md-text);max-width:720px;margin:0 auto;padding:32px;display:flex;flex-direction:column;gap:10px;font:14px/1.55 -apple-system,BlinkMacSystemFont,'SF Pro','Segoe UI',sans-serif;overflow-wrap:break-word}body>:first-child{margin-top:0}h1,h2,h3,h4,h5,h6{margin:6px 0 0;line-height:1.25;font-weight:600;text-wrap:balance}h1{font-size:1.35em}h2{font-size:1.15em;color:var(--md-muted)}h3,h4,h5,h6{font-size:1em}p,ul,ol,blockquote,table,pre,hr{margin:0}strong{font-weight:600}a{color:var(--md-link);text-decoration:none}a:hover{text-decoration:underline}ul,ol{display:flex;flex-direction:column;gap:6px;padding-left:22px}ul{list-style:disc}ol{list-style:decimal}:is(li,td,th)>*+:is(p,ul,ol,blockquote){margin-top:6px}blockquote{display:flex;flex-direction:column;gap:10px;border-left:2px solid var(--md-rule);padding-left:10px;color:var(--md-muted)}:not(pre)>code{background:var(--md-fill);padding:1px 3px;border-radius:4px;font:.92em 'SF Mono',ui-monospace,Menlo,Consolas,monospace}a>code{background:none;color:inherit}pre{background:var(--md-fill);padding:10px 12px;border-radius:6px;overflow-x:auto;font:12px/1.5 'SF Mono',ui-monospace,Menlo,Consolas,monospace;margin-block:4px}pre code{background:none;padding:0;font:inherit}table{width:100%;border-collapse:separate;border-spacing:2px;font:inherit}th,td{padding:6px 8px;border-radius:3px;text-align:left;vertical-align:top}th{background:var(--md-fill-strong);font-weight:600}td{background:var(--md-fill)}:is(th,td) :not(pre)>code{background:transparent}hr{border:0;border-top:1px solid var(--md-rule-strong);margin-block:10px}img{max-width:100%;height:auto;border-radius:4px}</style>
+</head><body>
+<h1>Case Study 2: H2, designing the near-term future</h1>
+<p><strong>Status:</strong> working draft, updated weekly in the dedicated H2 thread
+<strong>Scope:</strong> the H2 umbrella story, the layer between vision and delivery, and the work it spun out. Text Guru and Personalization each have their own case study; this one summarizes them and hands off.
+<strong>Last updated:</strong> 2026-11-02</p>
+<p><strong>Working titles</strong>
+- <del>Prototyping the near future: how a working POC redirected an AI roadmap</del> (superseded 2026-09-28: the POC is one thread now, not the spine)
+- <del>Designing H2: building the discovery layer between vision and delivery</del> (superseded 2026-09-28, folded into the new first option)
+- <del>From "what if" to another team's roadmap: incubating Guru</del> (kept below in revised form)
+- Designing the layer between vision and delivery: a PM partnership that turned wireframes into a roadmap
+- From strawman to Q4 OKRs: incubating Guru as the designer beside the PM
+- Making "do it for me" visible: designing agentic car shopping people will actually trust</p>
+<hr />
+<blockquote>
+<p>VISUAL: hero pairing. The strawman Hub frame (<a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=170-11449">Figma</a>) next to PRSN's shipped Guru Hub Phase 1 once it's live. Before-and-after of an idea becoming a product is the whole case study in one image.</p>
+</blockquote>
+<h2>1. Business / product overview</h2>
+<p>CarGurus' consumer experience is a search-and-filter funnel: SRP, VDP, lead form. Generative AI made a different shape possible, where a shopper describes what they want and something does the work. By early 2026 several teams were building toward that at once (Discover, Universal AI Mode, Agentic Outreach, AutoFetch, Dealership Mode), each with its own roadmap and its own idea of what "Guru" meant.</p>
+<p>In July the org consolidated these under Guru as the H2 umbrella, split into co-pilot (AI helps you shop) and auto-pilot (AI does the work for you). Raph Wallheimer became PM for both Guru Co-Pilot and Guru Auto-Pilot Search. (<a href="https://cargurus.atlassian.net/wiki/spaces/PROD/pages/6302990397">H2 Gameplan</a>)</p>
+<p>Quarterly planning is how that umbrella reached squads. Q3 guidance organized teams under co-pilot and auto-pilot pillars. Q4 guidance reorganized them around a 3x3 "menu of consumer experiences": Shop, Connect, and Visit, each at three levels of Guru involvement (Self-Driver, Co-Pilot, Concierge). (<a href="https://docs.google.com/presentation/d/18gQjQz1X5J6UTfCIrBAvZ5M_sNo26JtOPzqe7EoRVko">Q3 guidance</a>, <a href="https://docs.google.com/presentation/d/1eHzW8phHNTcn57iJJbyGcJUE2CaO2b_VJKa1anCWkck">Q4 guidance</a>)</p>
+<h2>2. Problem / purpose</h2>
+<p>Two problems, and the second is the real one.</p>
+<p><strong>Stated:</strong> consumers don't want to become car experts, and the funnel assumes they will. Meanwhile Google showed at I/O 2026 that it can chain agents into a full car-shopping journey where CarGurus supplies the inventory and none of the experience. (<a href="https://docs.google.com/document/d/112HifSQ794UyEDWCIs-VtHb-P_pFle25CHF85qnr9HY">personas doc</a>)</p>
+<p><strong>Actual:</strong> the company had a long-term vision and quarterly delivery teams, and nothing in between. Ideas were either too speculative to schedule or already committed to a sprint. And the exec layer said so directly: in August, Andrew relayed ET feedback that the strategy was "theoretical and hard to picture, bring the vision to life for us." (<a href="https://cargurus.enterprise.slack.com/archives/D087E3L0Y82/p1787230909995439">Slack</a>)</p>
+<p>H2 is the name for that middle layer: near-term, not next-sprint. Concrete enough to test, early enough to change direction.</p>
+<p><del>&gt; OPEN: the critical one. Was this an assigned mandate or self-directed?</del> (superseded 2026-09-28, evidence found, question narrowed below)</p>
+<p><strong>Mandate evidence so far.</strong> On March 11 Chris wrote a role-options doc proposing "H2 Lead/Architect" as one of five focus areas, defined as near-term work that sits above scrum teams, "similar to how we incubated Discover, Consumer AI and Dealer Mode." (<a href="https://docs.google.com/document/d/1JPP-VLpAFCBggmMeXWPInBlt8F4oPodf7yX_YmvWxV4">doc</a>) By April 17, Raph was asking to get together for H2 work. (<a href="https://cargurus.enterprise.slack.com/archives/D0AQFS77TUM/p1776434185407729">Slack</a>) By late July there was a standing weekly Chris x Raph 1:1.</p>
+<p>So the likely frame is neither pure mandate nor pure self-direction: <strong>self-proposed, then pulled in by the PM who ended up owning it.</strong> That's a good story if true.</p>
+<blockquote>
+<p>OPEN (narrowed): did anyone formally say yes to the H2 role, or did it become real because Raph kept using it? One sentence from Chris settles this.</p>
+<p>VISUAL: mandate timeline strip. Mar 11 role doc, Apr 17 Raph pulls me in, May 14 personas doc, Jul 17 Guru reorg, late Jul weekly 1:1, Aug 24 research, Sep 28 Q4 OKRs. Simple horizontal line, one label per point.</p>
+<p>VISUAL: the Maya journey as a diagram. Google agents chained end to end, CarGurus shown only as an inventory feed underneath. Pull quote beside it: "The inventory came from us. The experience didn't."</p>
+</blockquote>
+<h2>3. Users and audience</h2>
+<p><strong>Consumers</strong>, framed by how much they want to delegate rather than by demographic. Auto-pilot shoppers are upper funnel, still forming a consideration set, time-constrained or low-confidence, and likely mobile. Co-pilot shoppers are lower funnel with roughly two vehicles in mind and want sharper comparison and validation tools. (<a href="https://docs.google.com/document/d/112HifSQ794UyEDWCIs-VtHb-P_pFle25CHF85qnr9HY">personas doc</a>)</p>
+<p><strong>Internal stakeholders</strong>, who were the immediate audience for almost every artifact. The PM needed a strawman to plan a half around. Executives needed to see the end state to fund it. Delivery teams (PRSN, S&amp;D) needed something concrete enough to build from. Research needed stimulus.</p>
+<blockquote>
+<p>VISUAL: delegation spectrum. Self-driver, co-pilot, auto-pilot on one axis, funnel stage on the other, with a mixed-journey path cutting across all three (the point Ryan and I both flagged).</p>
+</blockquote>
+<h2>4. Roles and responsibilities</h2>
+<p><del>I was the only designer across the horizon work</del> (superseded 2026-09-28: Calla MacDonald was also designing Guru concepts in Discover under SD-1026, and ownership between the two was unresolved in July. <a href="https://cargurus.enterprise.slack.com/archives/D08KC3P7HCJ/p1784732338180199">Slack</a>)</p>
+<p>Design partner to Raph Wallheimer (PM, Guru Co-Pilot and Auto-Pilot Search), weekly 1:1. Partners: Patrick Ingelmo and Liam Kelly (PRSN, building Guru Hub), Sydney Bigelow and Calla MacDonald (Discover), Dan Kennedy (eng strategy), John Huang (research), Andrew Grochal and Ryan Kiel (strategy), Sarah Chew (brand).</p>
+<p><strong>What I personally owned as IC:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Work</th>
+<th>Ticket / artifact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H2 Future State wireframes: Hub IA, preference split flow, Guru Read, Guru Picks behavior</td>
+<td><a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes">Figma</a></td>
+</tr>
+<tr>
+<td>Auto-pilot / co-pilot proto-personas + Google I/O threat analysis (co-written with Raph)</td>
+<td><a href="https://docs.google.com/document/d/112HifSQ794UyEDWCIs-VtHb-P_pFle25CHF85qnr9HY">doc</a></td>
+</tr>
+<tr>
+<td>Guru Hub IA, naming convention, SMS and negotiation flows</td>
+<td><a href="https://drive.google.com/file/d/1DPeMSesQD6cyE8QHmKYup0ZMcsrQrMJ_">guru-hub-context.md</a></td>
+</tr>
+<tr>
+<td>Discover preference-to-dashboard wireframe</td>
+<td><a href="https://www.figma.com/design/6cANCBU8X7rIeAKJcj51QD/Discover?node-id=7-136">Figma</a></td>
+</tr>
+<tr>
+<td>Text the Guru RCS prototype (built solo)</td>
+<td><a href="https://code.cargurus.com/childreth/RCS-POC">RCS-POC</a></td>
+</tr>
+<tr>
+<td>Text Guru entry points, in a shared RA-202 file with Erin Siefert</td>
+<td><a href="https://www.figma.com/design/OVi0CpBqBuF17qY2dhoIxt/RA-202-Text-the-Guru-MVP?node-id=6659-2103">RA-202 Figma</a></td>
+</tr>
+<tr>
+<td>UX AI-Transformation roadmap</td>
+<td><a href="https://docs.google.com/document/d/1NLqgeopuGTggt9hvTjXenv0S2Ln8_26jw7Zaw1AU1rE">doc</a></td>
+</tr>
+<tr>
+<td>CarGuru's Evolution: the 3x3 menu visualized cell by cell, with a clickable prototype, for ET and Q4 planning</td>
+<td><a href="https://www.figma.com/design/tjPncUQagpLCqYace2CzW6/CarGuru-s-Evolution">Figma</a></td>
+</tr>
+<tr>
+<td>Presenting the Guru vision at Q4 planning kickoff, priority setting, both design pods, and Demo Day</td>
+<td><a href="https://docs.google.com/presentation/d/1DINi9GOzH8c0fSM2OgUQY6sXV450_Oo71BVxkGvuQWg">Q4 kickoff</a></td>
+</tr>
+<tr>
+<td>Consumer AI entry points, mobile sheet, conversational lead</td>
+<td>CNAI-209 / 210 / 215</td>
+</tr>
+<tr>
+<td>Survey stimulus for the Guru Hub and Preferences research</td>
+<td><a href="https://cargurus.enterprise.slack.com/archives/C0BNPSA26FQ/p1786110603908339">Slack</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>What I did not own:</strong> the original RA-202 MVP draft designs (Erin Siefert, July to August: opt-in, conversation, and lead hand-off variants), the Guru Hub build and its phasing (PRSN), Agentic Discover V1 and Hey Dad onboarding build (S&amp;D), Guru Core (S&amp;D platform), the research itself (John Huang), Text Guru productionization (Dan Kennedy, R&amp;A), Agentic Outreach and AutoFetch (Heather's workstream), Calla's My Guru designs, the co-pilot / auto-pilot org structure, the Shop / Connect / Visit 3x3 framework itself (strategy team: Andrew, Ryan, with Raph and Heather), the Q3 and Q4 management guidance.</p>
+<blockquote>
+<p>OPEN: Hey Dad onboarding design. Is any of it Chris's? Until confirmed it stays in "did not own."
+<del>&gt; OPEN: the co-pilot / auto-pilot framing appears in the April deck before the personas doc.</del> (superseded 2026-09-28: confirmed. The April deck proposes the two pillars, so the terms are Raph, Andrew, and Heather's. My contribution was persona depth, the I/O analysis, and later the visual layer of the 3x3.)
+OPEN: who renamed auto-pilot to concierge? In the 8/31 pod review Chris said "we kind of reframed it," which is ambiguous.</p>
+</blockquote>
+<h2>5. Scope and constraints</h2>
+<ul>
+<li><strong>No team, no sprint, no budget.</strong> Horizon work had to earn its place by being more convincing than the roadmap.</li>
+<li><strong>Two designers, overlapping concepts.</strong> Calla's My Guru work and Chris's Hub work covered similar ground with no agreed owner in July.</li>
+<li><strong>Naming.</strong> UAI and Discover converging on a single "Ask Guru" brand with no agreed separation, flagged as blocking entry-point placement. Later, "Text the Guru" was renamed "Text Guru" over cultural appropriation concerns. (<a href="https://docs.google.com/document/d/1DLho3rxYBtY4hYcWcaJrbEIiva7HoNXmcFsFiYjE0WI">Sep 25 email</a>)</li>
+<li><strong>Infrastructure the design assumed.</strong> Hidden listings existed only on the mobile app, so "Not interested" had to be scoped to Hub-only for v1. Anything past MVP depended on an orchestration layer (now Guru Core) that didn't exist yet.</li>
+<li><strong>Gated sequencing.</strong> Guru Hub Phase 1 can't launch until notifications win, and Notifications V1 and V2 were both stat-sig neutral.</li>
+<li><strong>Platform limits as a feature.</strong> The RCS prototype had no UI to hide behind.</li>
+</ul>
+<blockquote>
+<p>VISUAL: dependency chain. Notifications V3, then Hub Phase 1, Phase 2, Phase 3, with Guru Core underneath as the orchestration layer the prototype exposed. Shows why a finished design still waits.</p>
+</blockquote>
+<h2>6. Process</h2>
+<ol>
+<li>Proposed the role before it existed, then found the PM who needed it.</li>
+<li>Mapped consumers by degree of delegation, and wrote down the competitive threat in a single sentence.</li>
+<li>Wireframed the end state so the PM had a strawman to plan the half around.</li>
+<li>Split everything into Q3 now, Q4 to Q1 next, and H2 future, and said which was which out loud.</li>
+<li>Handed artifacts to research so opinion became data, and let the data overrule me where it did.</li>
+<li>Turned the strategy team's framework into nine concrete cells and carried it through Q4 planning, so every squad could see where its work sat.</li>
+<li>Built a working prototype when static frames stopped persuading, and let delivery teams take the surfaces over.</li>
+<li>Handed the two biggest threads off to their own teams, and to their own case studies.</li>
+</ol>
+<blockquote>
+<p>VISUAL: horizon swimlanes. Q3 Hub, Q4 to Q1 Hub, H2 future, with the Figma frames sorted into each (<a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=1304-23761">Q3</a>, <a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=593-7894">Q4 to Q1</a>, <a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=170-11449">original H2</a>). This is the move the PM actually used.</p>
+</blockquote>
+<h2>7. Outcomes and lessons learned</h2>
+<p><strong>Outcomes (with what was and wasn't mine):</strong></p>
+<ul>
+<li><strong>The 3x3 became how Q4 was planned.</strong> It appears in the Q4 planning kickoff (strategy agenda item presented by Andrew, Heather, Raph, Ryan, and me), the Q4 management guidance, and the Q3 Consumer All Hands. The Q4 guidance tells squads to "test into learnings on where co-pilot and concierge experiences offer ease and confidence" and to act as "one single team." The Q4 high-priority tests are sorted by Shop / Connect / Visit. (<a href="https://docs.google.com/presentation/d/1DINi9GOzH8c0fSM2OgUQY6sXV450_Oo71BVxkGvuQWg">Q4 kickoff</a>, <a href="https://docs.google.com/presentation/d/1eHzW8phHNTcn57iJJbyGcJUE2CaO2b_VJKa1anCWkck">Q4 guidance</a>, <a href="https://docs.google.com/presentation/d/11zeQU6aH7juqeNyrPr6Y7C2tUEylH_1rQrhRPxLYQBc">all hands</a>) The framework is the strategy team's. Making it visible and walking it through planning, both design pods, and Demo Day was mine.</li>
+<li><strong>The wireframes anchored the PM's plan.</strong> Raph's H2 AI V1 doc lists the H2 Future State Figma as the "Strawman H2 Vision" at the top. (<a href="https://docs.google.com/document/d/13Et1LPIZ2zYz6ellOE3O4IBI04ybjzU5znHQC-7P554">doc</a>)</li>
+<li><strong>Guru Hub became committed Q4 OKRs for PRSN</strong>, phased exactly along the concepts: Phase 1 UX shell and For You page by 10/31 at neutral CVR or better, Phase 2 preference collection by 11/30 with at least 10% of exposed shoppers completing, Phase 3 AI-powered Guru's Read by 12/31 at +2% CVR vs control. (<a href="https://docs.google.com/spreadsheets/d/126nKNXHj2gAoiHUSHM_L3F-KQ7wDVL_EUbo4NgYcY0I">Q4 OKRs</a>) Build is PRSN's. The concepts are mine. <del>None of it has shipped yet.</del> (superseded 2026-11-02) Phase 1 launched 10/16 behind an MVT and ramped to 50/50 on 10/19, with readout due early November. The V1 epic's design link is my H2 Future State frame. (<a href="https://cargurus.atlassian.net/browse/AN-11802">AN-11802</a>, <a href="https://cargurus.atlassian.net/browse/PRSN-4782">PRSN-4782</a>) Phase 2 (preferences onboarding, a "Set up what Guru watches" card on For You) is in build. (<a href="https://cargurus.atlassian.net/browse/AN-12501">AN-12501</a>) Its gate, Onsite Notifications V3, shipped to all web at +1.14% mWeb session-to-lead and +182K annualized leads. That's PRSN's work, not mine, but it's the first proven lead number in the agentic hub stack. (<a href="https://cargurus.enterprise.slack.com/archives/C0180P4RQCB/p1792589697333259">ship post</a>)</li>
+<li><strong>Research validated the direction and corrected the details.</strong> Guru Hub decisively beat the current homepage for returning shoppers. After the agentic capabilities screen, 77 of 102 were more interested and 5 less. But Guru's Read in its fuller form read as overwhelming, and shoppers resisted AI labeling. (<a href="https://docs.google.com/presentation/d/1zSOa_e70K1lzRQuYG2nbgpZV9R_EQ3uJ71Pz15zJzC4">readout</a>) Respondent count conflicts between sources (102 in the deck, ~200 in meeting notes); using 102.</li>
+<li><strong>Agentic Discover V1 is live and underperforming its own target.</strong> 2% engagement, 40% onboarding completion against a 50% OKR, ~5% lead CVR. (<a href="https://docs.google.com/document/d/1DLho3rxYBtY4hYcWcaJrbEIiva7HoNXmcFsFiYjE0WI">Sep 25 email</a>, <a href="https://docs.google.com/spreadsheets/d/1i6u5ObUbS_ddRbXjy59bW1l0t_WI8tHSoKME99Vctec">Q3 OKRs</a>) The stakeholder email marks it green anyway. Later updates explain part of the miss: only net-new users were shown the onboarding CTA, so this is partly exposure, not the flow. It's now defaulted to production, and the next step is widening CTA access. (<a href="https://cargurus.atlassian.net/wiki/spaces/PROD/pages/6661472896">Oct 23 update</a>) My design ownership here is unconfirmed.</li>
+<li><strong>The prototype became a pillar and then a Q4 build.</strong> Text the Guru became the North Star prototype alongside Dan's MVP; Dan pushed to productionize rather than run wizard-of-oz; eng kickoff 9/28 under the new name Text Guru. It also surfaced the orchestration layer as the real blocker, which is now Guru Core. Engineering's own readiness review credits the demo with closing the two biggest open questions (RCS cards render on iOS; an agent grounded in live CG inventory doesn't hallucinate). (<a href="https://cargurus.atlassian.net/wiki/spaces/ENGAGE/pages/6424985755">readiness plan</a>) By late October inbound texts were flowing end to end through Guru Core, with an internal pilot targeted for mid-November, and Agentic Outreach's SMS epic is building to the same shape. (<a href="https://docs.google.com/document/d/16ZMtdxqFHET6LXZ1TH6Mys6Y7CjJjLvQ9sDNl6iQuJI">Nov 6 email</a>, <a href="https://cargurus.atlassian.net/browse/BUY-2341">BUY-2341</a>) In flight, not shipped.</li>
+<li><strong>Mobile chat pattern:</strong> 20 participants over 2 rounds, 0 of 20 preferred the full sheet. Built on Chassis primitives.</li>
+</ul>
+<p><strong>Lessons (drafts, Chris to confirm or kill):</strong>
+- A prototype on real infrastructure ends arguments that mockups extend. The ET "too theoretical" feedback is the proof of the problem.
+- Giving the work away is the outcome. The Q4 OKRs are the ending, not a launch.
+- <strong>Candidate, and the most honest one so far:</strong> Sarah questioned calling the Hub modules "agents" for consumers; I argued the term was becoming common. Two and a half weeks later the research said shoppers like what AI does and resist the label, and recommended explaining Guru's capabilities "without calling it an agent." (<a href="https://cargurus.enterprise.slack.com/archives/D089B7QE1LG/p1786034317023519">Slack</a>, <a href="https://docs.google.com/presentation/d/1zSOa_e70K1lzRQuYG2nbgpZV9R_EQ3uJ71Pz15zJzC4">readout</a>) Designers absorb industry vocabulary faster than customers do.
+- Naming collisions are design problems, and a name can pass every internal review until it doesn't (Text the Guru to Text Guru). <del>The RA-202 review also caught consent copy saying "Text the Guru" on a button labeled "Text me," and that screen doubles as carrier registration evidence. Copy is compliance.</del> (superseded 2026-11-02: those were Erin's July to August drafts, not my work. Moved to the Text Guru case study as part of the RA-202 collaboration story.)
+- <strong>Candidate:</strong> a working prototype still gets judged by how it looks to people who haven't seen it run. In late September an engineering manager wrote it off as a nice Figma prototype. The answer was a 24/7 deploy and a "what's real and what's not" readme, not a better deck. (<a href="https://code.cargurus.com/childreth/RCS-POC?tab=readme-ov-file#whats-real-and-whats-not">readme</a>) Private DM as the source; paraphrase only.</p>
+<p><del>&gt; OPEN: what didn't work. Right now this reads as a highlight reel.</del> (superseded 2026-09-28: failure candidates now exist, see below)</p>
+<blockquote>
+<p>OPEN: pick which failure to tell. Candidates with evidence: the "agent" framing call above; Agentic Discover onboarding at 40% vs 50%; Guru's Read testing as overwhelming; the naming change. Only the first is clearly Chris's own call.</p>
+<p>VISUAL: concept-to-OKR map. Three rows: my frame, PRSN phase, key result (Phase 1 neutral CVR by 10/31, Phase 2 10% completion by 11/30, Phase 3 +2% CVR by 12/31). Strongest single outcome visual.</p>
+<p>VISUAL: Agentic Discover funnel. 2% engagement, 40% onboarding completion with the 50% target drawn as a line, ~5% lead CVR. Honest chart, include it even though it misses. Hold until ownership is confirmed.</p>
+<p>VISUAL: research stat callouts. 77 of 102 more interested after the agentic screen; Guru Hub beat the current homepage; the "overwhelming" quote next to the Guru's Read variant that won.</p>
+<p>VISUAL: the "agent" failure as a side-by-side. My 8/6 position on the left, the 8/24 research recommendation on the right, dates visible.</p>
+</blockquote>
+<h2>7a. What H2 handed off</h2>
+<p>H2 wasn't meant to ship things itself. Its job was to make ideas concrete enough that a delivery team would pick them up. Two of those threads are now big enough to be their own case studies; the rest stayed here.</p>
+<p><strong>Text Guru → [Text Guru case study (link TBD)]</strong>
+Started as my solo RCS prototype (live CG inventory over Twilio, OpenAI, and CG MCPs). Engineering's readiness review credited it with closing the two biggest open questions. R&amp;A (Liz Lupton, Tyler Maxwell) is now building it on Guru Core, with an internal pilot targeted for mid-November. My ongoing part is the entry points, in a shared RA-202 file with Erin Siefert, who drafted the original MVP flows. The build, the Guru Core work, and how Erin and I split RA-202 live in the Text Guru case study.</p>
+<p><strong>Personalization (Guru Hub and preferences) → [Personalization case study (link TBD)]</strong>
+Started as the H2 Future State wireframes: Hub IA, the "I know / I don't know" preference split, Guru Picks, Guru's Read. PRSN (Patrick Ingelmo, Liam Kelly) turned it into a three-phase Q4 objective. Phase 1 launched 10/16 at 50/50, Phase 2 preferences onboarding is in build, and Phase 3 Guru's Read is in backend work. The phase-by-phase design work and results live in the Personalization case study.</p>
+<p><strong>Stayed in H2:</strong> the role itself, the personas and I/O threat framing, the 3x3 menu and Q4 planning, Consumer AI entry points (CNAI), and the ET vision work.</p>
+<blockquote>
+<p>OPEN: links to both sub case studies once they're published.</p>
+</blockquote>
+<ul>
+<li><strong>Suggested visual:</strong> a simple tree. H2 at the root, three branches (Text Guru, Personalization, Q4 planning), each tagged with its owning team and current status. This is the summary image for the whole case study.</li>
+</ul>
+<hr />
+<h2>8. Process detail</h2>
+<h3>Step: Proposing the role (March to April 2026)</h3>
+<ul>
+<li><strong>What:</strong> a role-options doc naming H2 Lead/Architect as a near-term layer above scrum teams.</li>
+<li><strong>Why:</strong> split across 4 to 5 teams as IC and lead; context-switching was slowing the product down.</li>
+<li><strong>Result:</strong> Raph pulled Chris into H2 work by April; weekly 1:1 by late July.</li>
+<li><strong>What I learned:</strong> &gt; OPEN</li>
+<li>
+<p><strong>Artifacts:</strong> <a href="https://docs.google.com/document/d/1JPP-VLpAFCBggmMeXWPInBlt8F4oPodf7yX_YmvWxV4">role options doc</a> · <a href="https://docs.google.com/document/d/1NLqgeopuGTggt9hvTjXenv0S2Ln8_26jw7Zaw1AU1rE">UX AI-Transformation</a></p>
+</li>
+<li>
+<p><strong>Suggested visual:</strong> role options doc cropped to the H2 Lead/Architect paragraph. Text screenshot is fine here, it's evidence.</p>
+</li>
+</ul>
+<h3>Step: Persona work, auto-pilot and co-pilot</h3>
+<ul>
+<li><strong>What:</strong> framed consumers by how much of the shopping work they want to delegate, with a Google I/O 2026 threat analysis and a journey where the shopper never opens CarGurus.</li>
+<li><strong>Why:</strong> "AI features" wasn't a frame anyone could design against. Degree of delegation was.</li>
+<li><strong>Result:</strong> the language matched the org's July grouping.</li>
+<li><strong>What I learned:</strong> the modes aren't mutually exclusive. I pushed for showing a mixed journey because a grid implied users pick a lane. Ryan flagged the same risk independently.</li>
+<li>
+<p><strong>Artifacts:</strong> <a href="https://docs.google.com/document/d/112HifSQ794UyEDWCIs-VtHb-P_pFle25CHF85qnr9HY">personas doc</a> · <a href="https://drive.google.com/file/d/1X8EjzIWF_YDyXDGjcqDFvOohKCT_3SOw">earlier persona / threat file</a></p>
+</li>
+<li>
+<p><strong>Suggested visual:</strong> personas doc spread with the I/O pieces annotated as a chain.</p>
+</li>
+</ul>
+<h3>Step: H2 future state wireframes and Guru Hub</h3>
+<ul>
+<li><strong>What:</strong> Hub IA (Home, Goals, Chat, where Home and Goals are two lenses on the same data), preference onboarding with the "I know / I don't know" split, Guru Read, Guru Picks. Later split into Q3 lightweight Hub, Q4 to Q1 Hub, and original H2.</li>
+<li><strong>Why:</strong> the PM needed a strawman to plan the half. Delivery teams needed to know what was near-term vs aspirational.</li>
+<li><strong>Result:</strong> became the "Strawman H2 Vision" in Raph's plan, survey stimulus in August, and the basis for PRSN's three-phase Guru Hub OKRs.</li>
+<li><strong>What I learned:</strong> the most useful thing I did for the PM was label horizons, not add screens. The 7/16 "what goes in Q3 Hub vs H2 future" conversation and the 8/19 three-way split let PRSN commit without inheriting the whole vision.</li>
+<li>
+<p><strong>Artifacts:</strong> <a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=170-11449">original H2</a> · <a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=1304-23761">Q3 Hub</a> · <a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=593-7894">Hub Q4 to Q1</a> · <a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=1023-7104">preference onboarding</a> · <a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=1459-16379">Guru Read</a></p>
+</li>
+<li>
+<p><strong>Suggested visual:</strong> Hub IA diagram (Home and Goals as two lenses on the same data, Chat as entry) plus the <a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=919-2943">Hub UI frame</a>.</p>
+</li>
+</ul>
+<h3>Step: Preference capture with Raph and PRSN (summary, handed off)</h3>
+<ul>
+<li><strong>What:</strong> the split-flow preference setup and the Discover preference-to-dashboard wireframe, worked through with Raph and Patrick.</li>
+<li><strong>Where it went:</strong> Guru Hub Phase 2 preferences onboarding, in build. Full story in the Personalization case study (link TBD).</li>
+</ul>
+<details>
+<summary>Detail as of 2026-11-02, moved to the Personalization case study (kept for history)</summary>
+<ul>
+<li><strong>What:</strong> split-flow preference setup for the Hub, plus a Discover wireframe where Guru collects 3 preferences and builds a living dashboard as the payoff.</li>
+<li><strong>Why:</strong> preferences are the foundation for every agentic capability after them.</li>
+<li><strong>Result:</strong> Raph pushed for gamified checkbox steps. Patrick set the rule that shared questions use identical phrasing across surfaces, adopted as a PRSN decision along with not exposing inferred profile data in V1. Research later showed ~2x preference for starting broad and adding filters, and the highest interest of anything tested went to must-have / nice-to-have ranking with live % match.</li>
+<li><strong>What I learned:</strong> &gt; OPEN. Candidate: the research's "don't treat clicks as preferences" finding validated the V1 decision not to prefill inferred data, before anyone had the data to justify it.</li>
+<li>
+<p><strong>Artifacts:</strong> <a href="https://www.figma.com/design/6cANCBU8X7rIeAKJcj51QD/Discover?node-id=7-136">Discover wireframe</a> · <a href="https://cargurus.atlassian.net/wiki/spaces/prsn/pages/6364332070">CarGurus Preferences</a></p>
+</li>
+<li>
+<p><strong>Suggested visual:</strong> the <a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=1023-7104">split flow</a> next to the research's winning preference mock, then Raph's gamified checkbox steps from the <a href="https://www.figma.com/design/6cANCBU8X7rIeAKJcj51QD/Discover?node-id=7-136">Discover wireframe</a>.</p>
+</li>
+</ul>
+</details>
+<h3>Step: Guru Picks "Not interested" (summary, handed off)</h3>
+<ul>
+<li><strong>What:</strong> dismiss behavior that teaches Guru instead of dead-ending, scoped to Hub-only for v1.</li>
+<li><strong>Where it went:</strong> Guru Hub V1 and PRSN-4930. Full story in the Personalization case study (link TBD).</li>
+</ul>
+<details>
+<summary>Detail as of 2026-11-02, moved to the Personalization case study (kept for history)</summary>
+<ul>
+<li><strong>What:</strong> remove from view, confirm with toast, append another listing if available.</li>
+<li><strong>Why:</strong> reacting to recommendations is how Guru learns; a dead-end dismiss teaches nothing.</li>
+<li><strong>Result:</strong> eng found hidden listings only existed on app; scoped to Hub-only for v1 to get early signal. PRSN-4930 now maps Hub preferences to inventory, including a populated shelf for shoppers with no history.</li>
+<li><strong>What I learned:</strong> &gt; OPEN</li>
+<li>
+<p><strong>Artifacts:</strong> <a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=2265-40107">Figma</a> · <a href="https://slack.com/archives/C0BN68C9NUV/p1787153491149889">thread</a> · <a href="https://cargurus.atlassian.net/browse/PRSN-4930">PRSN-4930</a></p>
+</li>
+<li>
+<p><strong>Suggested visual:</strong> three-state strip from the <a href="https://www.figma.com/design/pib8PnLSRQvj73xvUYQSpS/H2-Future-state---Wireframes?node-id=2265-40107">Picks frame</a>: card, toast, appended card. Caption the app-only hidden-listings constraint.</p>
+</li>
+</ul>
+</details>
+<h3>Step: Q3 and Q4 planning, the 3x3 menu (CarGuru's Evolution)</h3>
+<ul>
+<li><strong>What:</strong> took the strategy team's Shop / Connect / Visit by Self-Driver / Co-Pilot / Concierge framework and built a frame for every cell, with a clickable prototype running through them. The Shop x Concierge cell is Guru Hub (Guru's Read, agent updates, Guru picks, preferences), which answered Andrew's ask for a "Centralized Guru Hub box" on the framework slide. Connect x Concierge shows Guru-confirmed out-the-door pricing; Visit x Concierge ends in a deal checklist.</li>
+<li><strong>Why:</strong> Q3 guidance had given squads two pillars and a future-state mockup explicitly marked "not something we are sprinting to build." By August ET was calling the strategy too theoretical. Squads needed to see where their Q4 work sat, and leadership needed to picture the end state.</li>
+<li><strong>Result:</strong> the 3x3 became the organizing slide for Q4: planning kickoff (8/30), priority setting (8/31), commitment and exploration pod reviews (8/31, 9/1), Q4 management guidance (9/8), Demo Day (9/9), and the Q3 all hands. Q4 OKRs line up with the cells: PRSN's three-phase Guru Hub, Decision's Guru-capabilities VDP test, App's Guru Co-Pilot KRs, and S&amp;D's Guru Core as the shared foundation. (<a href="https://docs.google.com/spreadsheets/d/126nKNXHj2gAoiHUSHM_L3F-KQ7wDVL_EUbo4NgYcY0I">Q4 OKRs</a>)</li>
+<li><strong>What I learned:</strong> the lane grid invited the wrong reading again. The first question in every room was whether a self-driver could ever be a co-pilot, so each walkthrough had to open with shoppers moving between lanes (a self-driver on VDP asking Guru to reach out). The same risk Ryan and I flagged on the persona grid came back in the planning grid. &gt; OPEN: confirm this is the lesson, or replace it.</li>
+<li>
+<p><strong>Artifacts:</strong> <a href="https://www.figma.com/design/tjPncUQagpLCqYace2CzW6/CarGuru-s-Evolution">CarGuru's Evolution</a> · <a href="https://www.figma.com/design/tjPncUQagpLCqYace2CzW6/CarGuru-s-Evolution?node-id=1-2">3x3 frame</a> · <a href="https://www.figma.com/design/tjPncUQagpLCqYace2CzW6/CarGuru-s-Evolution?node-id=26-14564">Shop x Concierge / Hub</a> · <a href="https://www.figma.com/design/tjPncUQagpLCqYace2CzW6/CarGuru-s-Evolution?node-id=26-15165">Connect x Concierge</a> · <a href="https://www.figma.com/design/tjPncUQagpLCqYace2CzW6/CarGuru-s-Evolution?node-id=26-15781">Visit x Concierge</a> · <a href="https://docs.google.com/presentation/d/18gQjQz1X5J6UTfCIrBAvZ5M_sNo26JtOPzqe7EoRVko">Q3 guidance</a> · <a href="https://docs.google.com/presentation/d/1DINi9GOzH8c0fSM2OgUQY6sXV450_Oo71BVxkGvuQWg">Q4 kickoff</a> · <a href="https://docs.google.com/presentation/d/1eHzW8phHNTcn57iJJbyGcJUE2CaO2b_VJKa1anCWkck">Q4 guidance</a></p>
+<blockquote>
+<p>OPEN: is the "mockup shared during our kickoff" in the Q3 guidance mine? If so, it's the Q3 half of this step.
+NOTE: concierge-row frames are still layer-named "Co-Pilot" in Figma. Rename before sharing.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Suggested visual:</strong> the 3x3 grid itself (<a href="https://www.figma.com/design/tjPncUQagpLCqYace2CzW6/CarGuru-s-Evolution?node-id=1-2">frame</a>), then a strip of the three concierge frames. Second visual: the same grid with each Q4 OKR pinned to its cell. That overlay is the "how it directed teams" story in one picture.</p>
+</li>
+</ul>
+<h3>Step: Text the Guru prototype (summary, handed off)</h3>
+<ul>
+<li><strong>What:</strong> a working RCS shopping prototype on live inventory, built solo, plus the Text Guru entry points now in RA-202.</li>
+<li><strong>Why it mattered to H2:</strong> it was the clearest case of horizon work turning into a funded build. Static frames hadn't moved anyone; a working agent in a phone's Messages app did.</li>
+<li><strong>Where it went:</strong> R&amp;A production build on Guru Core, internal pilot mid-November. Full story in the Text Guru case study (link TBD).</li>
+</ul>
+<details>
+<summary>Detail as of 2026-11-02, moved to the Text Guru case study (kept for history)</summary>
+<ul>
+<li><strong>What:</strong> working RCS shopping experience. Twilio for sending, webhooks to my own device as the server, OpenAI plus CarGurus MCPs for real inventory. Natural language queries returned real listings with conversation and intent awareness. Later moved to Cloudflare to run 24/7. Alongside it, the RA-202 MVP designs: entry points with opt-in, the conversation, and lead hand-off variants.</li>
+<li><strong>Why:</strong> a messaging concept couldn't be evaluated as static frames.</li>
+<li><strong>Result:</strong> North Star prototype pillar; Dan pushed to productionize; UX research completed 9/10; eng kickoff 9/28 as "Text Guru." Engineering's readiness review said the demo closed the two biggest open questions and scoped what production still needed (consent, persistence, queueing, auth, observability), estimating 8 to 12 weeks to a pilot. (<a href="https://cargurus.atlassian.net/wiki/spaces/ENGAGE/pages/6424985755">readiness plan</a>)</li>
+<li><strong>The fork was dropped for the platform.</strong> RA-320 started as a fork of guru-core. By October the plan was a Java gateway with no AI code, contributing a text surface to Guru Core instead. (<a href="https://cargurus.atlassian.net/browse/RA-320">RA-320</a>, <a href="https://cargurus.atlassian.net/wiki/spaces/ENGAGE/pages/6585647184">milestones</a>)</li>
+<li><strong>The channel changed the agent's behavior.</strong> Guru Core's new text_guru surface caps results at 3 cards (vs 6 on web) and adds a "Clarify Before Searching" rule that overrides the platform's "Act First" default, since over text there's no results page to scan. (<a href="https://code.cargurus.com/cargurus-eng/guru-core/pull/28">PR #28</a>)</li>
+<li><strong>Rich RCS came back.</strong> The August MVP deferred the carousels designed in RA-202 to text-plus-link. The October milestones restore rich RCS rendering, with SMS fallback as a first-class path. (<a href="https://cargurus.atlassian.net/wiki/spaces/ENGAGE/pages/6401884318">MVP architecture</a>)</li>
+<li><strong>Status (11/2):</strong> inbound messaging works end to end; architecture review done; RCS business profile and 1-800 fallback in registration; internal pilot ETA mid-November. Guru Core's streaming responses are an open dependency. (<a href="https://docs.google.com/document/d/16ZMtdxqFHET6LXZ1TH6Mys6Y7CjJjLvQ9sDNl6iQuJI">Nov 6 email</a>)</li>
+<li><strong>It's becoming the company pattern.</strong> Agentic Outreach's SMS epic is building toward "the shape that Text Guru and COMMS are converging on." (<a href="https://cargurus.atlassian.net/browse/BUY-2341">BUY-2341</a>)</li>
+<li><strong>What I learned:</strong> the platform constraint was the best thing about it. No chrome, nowhere to hide a weak flow. The October guardrail work proved the same thing from the engineering side: the channel decides how the agent should behave, not just how it renders. Also, the opt-in screens turned out to be legal evidence for carrier registration, so a copy inconsistency there was a launch risk, not a nit.</li>
+<li>
+<p><strong>Artifacts:</strong> demo recording in Slack, 2026-08-12 · <a href="https://code.cargurus.com/childreth/RCS-POC">RCS-POC</a> · <a href="https://www.figma.com/design/OVi0CpBqBuF17qY2dhoIxt/RA-202-Text-the-Guru-MVP?node-id=6659-1526">RA-202 Figma</a> · <a href="https://www.figma.com/design/OVi0CpBqBuF17qY2dhoIxt/RA-202-Text-the-Guru-MVP?node-id=8698-1819">RCS banner variants</a> · <a href="https://docs.google.com/document/d/1LMrFxRKatjM-d9wpfw5NMS0o5CHu60PCypIdS7F2VKc">research brief</a>
+<del>&gt; OPEN: TTG research findings</del> (superseded 2026-11-02: the research brief exists, results pending)</p>
+<blockquote>
+<p>OPEN: Text Guru research results; whether the internals can be shown publicly; Chris's read on the rename; whether RA-202 is Chris's file end to end; whether Chris influenced "Clarify Before Searching."
+WATCH: internal pilot (mid-Nov) is the next real outcome for this step.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Suggested visual:</strong> phone-frame GIF of the RCS demo from the 8/12 recording, plus a small architecture sketch (Twilio, webhook, OpenAI, CG MCPs). Then a before-and-after of that sketch: the prototype's single loop vs production's gateway plus Guru Core, with the "no AI code in the gateway" boundary drawn in. Blur internals until shareability is confirmed.</p>
+</li>
+</ul>
+</details>
+<h3>Step: Consumer AI entry points and mobile patterns (CNAI-209 / 210 / 215)</h3>
+<ul>
+<li><strong>What:</strong> persistent vs contextual entry points on SRP and VDP; Med vs Full sheet on mobile; conversational lead submission.</li>
+<li><strong>Why:</strong> the vision only matters if it lands in shipping surfaces.</li>
+<li><strong>Result:</strong> Med sheet won 20 to 0. The first UAI MVT (not my build) saw a 0.40% mobile open rate and wasn't rolled out; the next test, with new entry points and mobile UI, targets 10/9.</li>
+<li><strong>What I learned:</strong> favored placements where users already expect AI and it has page context, which cuts cold-opener prompts.</li>
+<li>
+<p><strong>Artifacts:</strong> <a href="https://www.figma.com/design/8rGzk53tCVW2fLPSYfnfAu/CNAI-210-UAI-Primary-Entrypoints-Exploration">entry points</a> · <a href="https://www.figma.com/design/DB4xZlZCQuPDDT9q9py9Ks/CNAI-215-UAI-Mobile-optimization-patterns">mobile patterns</a> · <a href="https://chassis-srp-prototype.netlify.app/page-srp-wf.html">prototype</a></p>
+</li>
+<li>
+<p><strong>Suggested visual:</strong> Med vs Full sheet side by side with "0 of 20 preferred Full" as the caption.</p>
+</li>
+</ul>
+<h3>Step: Making it tangible for ET (August)</h3>
+<ul>
+<li><strong>What:</strong> the vision stitched into a clickable flow for Andrew's ET review, covering co-pilot, concierge shopping, concierge outreach, and a Centralized Guru Hub.</li>
+<li><strong>Why:</strong> ET feedback that the strategy was too theoretical to picture.</li>
+<li><strong>Result:</strong> <del>&gt; OPEN, what was delivered and how it landed.</del> (superseded 2026-09-28) The delivery became CarGuru's Evolution, which then carried into Q4 planning. See the 3x3 step above.<blockquote>
+<p>OPEN: how ET itself reacted.</p>
+</blockquote>
+</li>
+<li><strong>What I learned:</strong> &gt; OPEN</li>
+<li>
+<p><strong>Artifacts:</strong> <a href="https://www.figma.com/design/tjPncUQagpLCqYace2CzW6/CarGuru-s-Evolution">CarGuru's Evolution</a></p>
+</li>
+<li>
+<p><strong>Suggested visual:</strong> a short screen recording of the CarGuru's Evolution prototype clicking through one row.</p>
+</li>
+</ul>
+<h3>Step: Handoff to PRSN (summary)</h3>
+<ul>
+<li><strong>What:</strong> Guru Hub concepts became BUY-2165, then PRSN's three-phase Q4 objective.</li>
+<li><strong>Why:</strong> the V.5 Agentic Outreach readout showed drop-off at intent, not completion, and the promise resolved into an email with no surface to return to.</li>
+<li><strong>Where it went:</strong> Phase 1 live at 50/50 since 10/19, readout early November. Results tracked in the Personalization case study (link TBD).</li>
+</ul>
+<details>
+<summary>Detail as of 2026-11-02, moved to the Personalization case study (kept for history)</summary>
+<ul>
+<li><strong>What:</strong> Guru Hub concepts became BUY-2165 (Purchase Agent V2 Account Hub) and then PRSN's Q4 Guru Hub OKRs.</li>
+<li><strong>Why:</strong> the V.5 Agentic Outreach readout showed drop-off at intent, not completion (launcher shown-to-start 1.8% mobile / 1.7% desktop vs 3.1% / 4.2% baseline; start-to-submit ~55%; submit-to-success ~98%). "Check availability" beat "Contact with Guru" (+3.8% vs -5% VDP-to-lead). The promise resolved into an email with no surface to return to. (BUY-2165)</li>
+<li><strong>Result:</strong> three phases committed for Q4. Phase 1 gated on Notifications V3 (launched 9/23), <del>targeting 10/8</del> (superseded 2026-11-02). Notifications V3 shipped at +1.14% mWeb session-to-lead. Phase 1 launched 10/16, 50/50 on 10/19, readout early November. Phase 2 preferences in build.</li>
+<li><strong>What I learned:</strong> &gt; OPEN, what the handoff cost and what changed once PRSN owned it.</li>
+<li>
+<p><strong>Artifacts:</strong> <a href="https://www.figma.com/design/Va1PyS0rIGxY7KZRrhXrmp/Agentic-Outreach?node-id=3245-46483">Agentic Outreach</a> · <a href="https://www.figma.com/board/3Kwh6KHqp7Ajf8B4g7yCfM/Agentic-Purchase-%E2%80%94-Shopper-Journey-Map">journey map</a></p>
+</li>
+<li>
+<p><strong>Suggested visual:</strong> V.5 funnel bar chart. Shown-to-start 1.8% / 1.7% vs 3.1% / 4.2% baseline, start-to-submit ~55%, submit-to-success ~98%. Drop-off at intent is visible at a glance.</p>
+</li>
+</ul>
+</details>
+<hr />
+<h2>Changelog</h2>
+<ul>
+<li><strong>2026-09-11</strong> · Draft created from Slack, Jira, and Figma evidence. Mandate question open and blocking.</li>
+<li><strong>2026-09-28</strong> · Round one in the dedicated H2 thread. Reframed around the Raph partnership. Mandate question narrowed with March and April evidence. August research readout added (closes survey OPEN). Agentic Discover V1 first numbers added with the OKR conflict. Q4 OKRs added as the handoff outcome. "Only designer" claim superseded. Failure candidates added. New steps: role proposal, preference capture, Guru Picks, ET vision. Em dashes removed from carried-over text per voice rules.</li>
+<li><strong>2026-09-28</strong> · Added suggested visuals per section and step. Figma frames linked; exports pending Figma Desktop Bridge.</li>
+<li><strong>2026-09-28</strong> · Added Q3 and Q4 planning: new process step for the 3x3 menu and CarGuru's Evolution, outcome on how the framework organized Q4 squads and OKRs. Pillar-terms origin confirmed as Raph, Andrew, and Heather's April deck (closes OPEN). ET delivery partly closed. New OPEN: who renamed auto-pilot to concierge; whether the Q3 kickoff mockup is mine.</li>
+<li><strong>2026-11-02</strong> · Weekly run. Text Guru step rewritten as in flight: readiness review, fork dropped for Guru Core, text_guru surface and Clarify Before Searching, rich RCS back in scope, internal pilot mid-Nov, AO SMS converging on the same shape. Guru Hub Phase 1 launched 10/16 (supersedes "none of it has shipped"). Notifications V3 result added as a dependency. Agentic Discover miss contextualized as partly exposure. Two new lesson candidates (consent copy as compliance; prototype judged by looks). New OPEN: RA-202 ownership, Phase 2 design ownership, Clarify Before Searching influence.</li>
+<li><strong>2026-11-02</strong> · Restructured as the umbrella case study. Added 7a "What H2 handed off," pointing to the Text Guru and Personalization case studies. Collapsed the Text Guru, preference, Guru Picks, and PRSN handoff steps to summaries, with prior detail kept in expandable sections. RA-202 attribution corrected: Erin Siefert drafted the original MVP flows; Chris owns the entry points in the shared file. Consent-copy lesson superseded as not Chris's work.</li>
+</ul>
+</body></html>
