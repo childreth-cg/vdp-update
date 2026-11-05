@@ -69,6 +69,17 @@
     update();
   }
 
+  // Header variant picker: swaps only the scroll header's presentation.
+  const variantSelect = document.getElementById('header-variant');
+  let savedVariant;
+  try { savedVariant = localStorage.getItem('header-variant'); } catch (e) {}
+  if (savedVariant && variantSelect.querySelector(`option[value="${savedVariant}"]`)) variantSelect.value = savedVariant;
+  bar.dataset.variant = variantSelect.value;
+  variantSelect.addEventListener('change', () => {
+    bar.dataset.variant = variantSelect.value;
+    try { localStorage.setItem('header-variant', variantSelect.value); } catch (e) {}
+  });
+
   document.querySelector('.back-to-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'instant' : 'smooth' }));
   const dialog = document.querySelector('.placeholder-dialog');
   document.querySelectorAll('[data-dialog]').forEach(button => button.addEventListener('click', () => {
