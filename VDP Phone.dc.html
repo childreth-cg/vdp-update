@@ -84,6 +84,9 @@
       --gradient-gray-end: 38%; --gradient-blue: 50%; --gradient-midnight: 75%;
       background: linear-gradient(180deg, var(--fog) var(--gradient-gray-end), #04A3FD var(--gradient-blue), var(--cg-midnight) var(--gradient-midnight));
     }
+    .sheet-body.has-scroll-gradient-1 { background: linear-gradient(180deg, var(--fog) 42.31%, #83C7EE 61.06%, #0499FD 79.81%, #0763D3 98.56%); }
+    .has-scroll-gradient-1 .mobile-wireframes { background: transparent; }
+    .has-scroll-gradient-1 .mobile-wireframes .wire { background: #fff; }
     .sheet-body.has-scroll-gradient-c { background: linear-gradient(180deg, var(--fog) 42.31%, #83C7EE 100%); }
     .has-scroll-gradient .mobile-wireframes, .has-scroll-gradient-c .mobile-wireframes { background: transparent; }
     .has-scroll-gradient-c .mobile-wireframes .wire { background: #fff; }
@@ -381,8 +384,8 @@
       </fieldset>
       <fieldset>
         <legend>Scroll gradient</legend>
-        <div class="settings-options" style="grid-template-columns: repeat(3, 1fr)">
-          <sc-for list="{{ gradientModes }}" as="m" hint-placeholder-count="3">
+        <div class="settings-options">
+          <sc-for list="{{ gradientModes }}" as="m" hint-placeholder-count="4">
             <button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.select }}" style="{{ m.style }}">{{ m.label }}</button>
           </sc-for>
         </div>
@@ -493,11 +496,11 @@ class Component extends DCLogic {
         const on = !!this.state.snapOn === k;
         return { label, selected: on, select: () => this.setState({ snapOn: k }), style: { minHeight: 44, padding: '0 18px', borderRadius: 12, border: 'none', cursor: 'pointer', textAlign: 'left', font: '500 15px/1 var(--font-body)', background: on ? 'var(--cg-midnight)' : 'transparent', color: on ? '#fff' : 'var(--ink-900)', transition: 'background 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
       }),
-      gradientModes: [['none', 'None'], ['a', 'Var A'], ['c', 'Var C']].map(([k, label]) => {
+      gradientModes: [['none', 'None'], ['1', 'Var 1'], ['a', 'Var 2 - dark'], ['c', 'Var 4 - light']].map(([k, label]) => {
         const on = (this.state.gradientMode || 'none') === k;
         return { label, selected: on, select: () => this.setState({ gradientMode: k }), style: { minHeight: 44, padding: '0 18px', borderRadius: 12, border: 'none', cursor: 'pointer', textAlign: 'left', font: '500 15px/1 var(--font-body)', background: on ? 'var(--cg-midnight)' : 'transparent', color: on ? '#fff' : 'var(--ink-900)', transition: 'background 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
       }),
-      sheetBodyClass: { a: 'has-scroll-gradient', c: 'has-scroll-gradient-c' }[this.state.gradientMode] || '',
+      sheetBodyClass: { 1: 'has-scroll-gradient-1', a: 'has-scroll-gradient', c: 'has-scroll-gradient-c' }[this.state.gradientMode] || '',
       isDocked:!!(this.state.tray || this.state.trayExiting) && (this.state.trayMode || 'docked') === 'docked',
       isFloating: !!(this.state.tray || this.state.trayExiting) && this.state.trayMode === 'floating',
       trayExitClass: this.state.trayExiting ? 'is-exiting' : '',
