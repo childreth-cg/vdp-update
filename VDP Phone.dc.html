@@ -77,6 +77,12 @@
     .mobile-wireframes .recommendations { padding-top: 50px; padding-bottom: 50px; }
     .mobile-wireframes .mobile-footer { padding: 50px 24px; border-radius: 20px; text-align: center; }
     .sheet-spacer { height: var(--sheet-peek); pointer-events: none; }
+    /* Grabber scrim over scrolled content: 44px, solid fog through the grabber, fading to transparent. */
+    .grabber-scrim {
+      position: absolute; left: 0; right: 0; top: 0; height: 44px; pointer-events: none;
+      border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+      background: linear-gradient(to bottom, rgba(244,246,249,0.9) 30%, rgba(244,246,249,0) 100%);
+    }
     /* Sheet surface. The optional scroll gradient is fixed to the sheet's length, so content scrolls through
        gray → blue → midnight. Stops are percentages of the sheet's height. */
     .sheet-body { background: var(--fog); }
@@ -196,7 +202,7 @@
         <div class="sheet-spacer" ref="{{ spacerRef }}"></div>
         <div style="position: sticky; top: calc(var(--header-height) + 12px); z-index: 2; height: 0; pointer-events: none">
           <sc-if value="{{ grabberOverflow }}" hint-placeholder-val="{{ false }}">
-          <div style="position: absolute; left: 0; right: 0; top: 0; height: var(--sheet-radius); pointer-events: none; border-radius: var(--sheet-radius) var(--sheet-radius) 0 0; background: rgba(244,246,249,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);"></div>
+          <div class="grabber-scrim" aria-hidden="true"></div>
           </sc-if>
           <div onClick="{{ resetSheet }}" style="position: absolute; left: 0; right: 0; top: 0; height: 20px; display: flex; justify-content: center; padding-top: 8px; box-sizing: border-box; pointer-events: auto; cursor: {{ gripCursor }}">
             <span style="width: 36px; height: 5px; border-radius: 3px; background: #79828D;"></span>
