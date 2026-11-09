@@ -58,7 +58,7 @@
     .mobile-wireframes .skeleton-line.short { width: 50%; }
     .mobile-wireframes .history { min-height: 340px; }
     .mobile-wireframes .deal-builder { min-height: 150px; }
-    .mobile-wireframes .details { min-height: 740px; }
+    .mobile-wireframes .details { min-height: 1480px; }
     .mobile-wireframes .guru-block { min-height: 270px; }
     .mobile-wireframes .display-ad { height: 180px; display: grid; place-items: center; background: #fff; border: 1px solid #e5e9ed; }
     .mobile-wireframes .display-ad h2 { margin: 0; }
@@ -66,17 +66,28 @@
     .mobile-wireframes .skeleton-table { height: 425px; background: repeating-linear-gradient(to bottom, transparent 0 41px, #dfe5eb 41px 42px); }
     .mobile-wireframes .wire-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 28px; }
     .mobile-wireframes .wire-pills i { height: 28px; background: #e3e7ed; border-radius: 30px; }
-    .mobile-wireframes .pricing { min-height: 390px; }
+    .mobile-wireframes .pricing { min-height: 780px; }
     .mobile-wireframes .chart-placeholder { width: 65%; aspect-ratio: 2; border: 20px solid #e0e6ec; border-bottom: 0; border-radius: 200px 200px 0 0; margin: 36px auto; }
     .mobile-wireframes .financing { min-height: 180px; }
     .mobile-wireframes .wire-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
     .mobile-wireframes .wire-cards > div { height: 150px; border-radius: 18px; background: #fff; border: 1px solid #e1e6eb; }
     .mobile-wireframes .subscribe { padding: 24px; border-radius: 18px; }
     .mobile-wireframes .subscribe h2, .mobile-wireframes .dealer h2 { margin: 0; }
-    .mobile-wireframes .dealer { height: 440px; display: grid; place-items: center; }
+    .mobile-wireframes .dealer { height: 880px; display: grid; place-items: center; }
     .mobile-wireframes .recommendations { padding-top: 50px; padding-bottom: 50px; }
     .mobile-wireframes .mobile-footer { padding: 50px 24px; border-radius: 20px; text-align: center; }
     .sheet-spacer { height: var(--sheet-peek); pointer-events: none; }
+    /* Sheet surface. The optional scroll gradient is fixed to the sheet's length, so content scrolls through
+       gray → blue → midnight. Stops are percentages of the sheet's height. */
+    .sheet-body { background: var(--fog); }
+    .sheet-body.has-scroll-gradient {
+      --gradient-gray-end: 38%; --gradient-blue: 50%; --gradient-midnight: 75%;
+      background: linear-gradient(180deg, var(--fog) var(--gradient-gray-end), #04A3FD var(--gradient-blue), var(--cg-midnight) var(--gradient-midnight));
+    }
+    .sheet-body.has-scroll-gradient-c { background: linear-gradient(180deg, var(--fog) 42.31%, #83C7EE 100%); }
+    .has-scroll-gradient .mobile-wireframes, .has-scroll-gradient-c .mobile-wireframes { background: transparent; }
+    .has-scroll-gradient-c .mobile-wireframes .wire { background: #fff; }
+    .has-scroll-gradient .mobile-wireframes .wire { background: #fff; }
     /* Let swipes on photos reach their native scroll container. */
     .vdp-phone image-slot::part(image) { touch-action: auto; }
     .vdp-phone image-slot::part(ring) { display: none; }
@@ -188,7 +199,7 @@
             <span style="width: 36px; height: 5px; border-radius: 3px; background: #79828D;"></span>
           </div>
         </div>
-        <div style="scroll-snap-align: start; background: var(--fog); border-radius: var(--sheet-radius) var(--sheet-radius) 0 0; padding: 20px 16px calc(200px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 12px; pointer-events: auto; min-height: 700px">
+        <div class="sheet-body {{ sheetBodyClass }}" style="scroll-snap-align: start; border-radius: var(--sheet-radius) var(--sheet-radius) 0 0; padding: 20px 16px calc(200px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 12px; pointer-events: auto; min-height: 700px">
 
           <!-- Summary -->
           <div style="display: flex; flex-direction: column; gap: 2px; padding: 0 0px">
@@ -368,6 +379,14 @@
           </sc-for>
         </div>
       </fieldset>
+      <fieldset>
+        <legend>Scroll gradient</legend>
+        <div class="settings-options" style="grid-template-columns: repeat(3, 1fr)">
+          <sc-for list="{{ gradientModes }}" as="m" hint-placeholder-count="3">
+            <button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.select }}" style="{{ m.style }}">{{ m.label }}</button>
+          </sc-for>
+        </div>
+      </fieldset>
       <section class="settings-qr" aria-labelledby="settings-qr-title">
         <h3 id="settings-qr-title">Open on your phone</h3>
         <a href="https://childreth-cg.github.io/vdp-update/VDP%20Phone.dc.html">
@@ -474,7 +493,12 @@ class Component extends DCLogic {
         const on = !!this.state.snapOn === k;
         return { label, selected: on, select: () => this.setState({ snapOn: k }), style: { minHeight: 44, padding: '0 18px', borderRadius: 12, border: 'none', cursor: 'pointer', textAlign: 'left', font: '500 15px/1 var(--font-body)', background: on ? 'var(--cg-midnight)' : 'transparent', color: on ? '#fff' : 'var(--ink-900)', transition: 'background 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
       }),
-      isDocked: !!(this.state.tray || this.state.trayExiting) && (this.state.trayMode || 'docked') === 'docked',
+      gradientModes: [['none', 'None'], ['a', 'Var A'], ['c', 'Var C']].map(([k, label]) => {
+        const on = (this.state.gradientMode || 'none') === k;
+        return { label, selected: on, select: () => this.setState({ gradientMode: k }), style: { minHeight: 44, padding: '0 18px', borderRadius: 12, border: 'none', cursor: 'pointer', textAlign: 'left', font: '500 15px/1 var(--font-body)', background: on ? 'var(--cg-midnight)' : 'transparent', color: on ? '#fff' : 'var(--ink-900)', transition: 'background 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
+      }),
+      sheetBodyClass: { a: 'has-scroll-gradient', c: 'has-scroll-gradient-c' }[this.state.gradientMode] || '',
+      isDocked:!!(this.state.tray || this.state.trayExiting) && (this.state.trayMode || 'docked') === 'docked',
       isFloating: !!(this.state.tray || this.state.trayExiting) && this.state.trayMode === 'floating',
       trayExitClass: this.state.trayExiting ? 'is-exiting' : '',
       onTrayAnimationEnd: (e) => {
