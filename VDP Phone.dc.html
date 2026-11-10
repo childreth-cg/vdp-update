@@ -114,6 +114,23 @@
         radial-gradient(circle at bottom right, transparent calc(var(--sheet-radius) - 0.25px), #000 calc(var(--sheet-radius) + 0.25px)) bottom left / var(--sheet-radius) var(--sheet-radius) no-repeat,
         radial-gradient(circle at bottom left, transparent calc(var(--sheet-radius) - 0.25px), #000 calc(var(--sheet-radius) + 0.25px)) bottom right / var(--sheet-radius) var(--sheet-radius) no-repeat;
     }
+    /* Horizontal gallery: the sheet rests so one 4:3 photo shows in full (its bottom corners tuck under the sheet). */
+    .vdp-phone.is-h-gallery { --sheet-peek: calc(75vw - 12px - var(--sheet-radius)); }
+    /* Horizontal gallery fills the area above the peeking sheet and tucks under its rounded corners. */
+    .h-gallery {
+      --h-gallery-h: calc(12px + var(--sheet-peek) + var(--sheet-radius));
+      position: fixed; left: 0; right: 0; top: var(--header-height); height: var(--h-gallery-h);
+      display: flex; gap: 4px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain; scrollbar-width: none;
+    }
+    .h-gallery img, .h-gallery-copy img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; display: block; }
+    .h-gallery img { scroll-snap-align: start; scroll-snap-stop: always; }
+    .h-gallery-copy { position: absolute; left: 0; right: 0; top: var(--header-height); height: calc(12px + var(--sheet-peek) + var(--sheet-radius)); display: flex; gap: 4px; }
+    .h-gallery-count {
+      position: fixed; z-index: 3; right: 12px; top: calc(var(--header-height) + var(--sheet-peek) - 28px);
+      padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,0.9); color: var(--ink-900);
+      font: 500 14px/1 var(--font-body); pointer-events: none;
+    }
     .gallery-header-copy { padding-top: var(--header-height); display: flex; flex-direction: column; gap: 4px; }
     .gallery-header-copy img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
     .prototype-settings { width: min(360px, calc(100% - 32px)); max-height: calc(100dvh - 48px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); box-sizing: border-box; padding: 0; border: 0; border-radius: 24px; background: var(--fog); color: var(--ink-900); font-family: var(--font-body); box-shadow: 0 16px 64px rgba(0,0,0,0.3); overscroll-behavior: contain; }
@@ -142,9 +159,20 @@
   </style>
 </helmet>
 
-<div class="vdp-phone" data-screen-label="VDP">
+<div class="vdp-phone {{ phoneClass }}" data-screen-label="VDP">
 
-      <!-- Gallery (behind sheet) -->
+      <!-- Horizontal gallery (behind sheet): fixed in place, swipes sideways; vertical swipes scroll the page. -->
+      <sc-if value="{{ isHGallery }}" hint-placeholder-val="{{ false }}">
+        <div class="h-gallery vdp-scroll" ref="{{ hGalleryRef }}" onScroll="{{ onHGalleryScroll }}">
+          <sc-for list="{{ hGalleryImages }}" as="img" hint-placeholder-count="3">
+            <img src="{{ img.src }}" alt="{{ img.alt }}">
+          </sc-for>
+        </div>
+        <div class="h-gallery-count" aria-live="polite">{{ hGalleryCount }}</div>
+      </sc-if>
+
+      <!-- Vertical gallery (behind sheet) -->
+      <sc-if value="{{ isVGallery }}" hint-placeholder-val="{{ true }}">
       <div class="vdp-scroll" ref="{{ galleryRef }}" onScroll="{{ onGalleryScroll }}" onTouchStart="{{ beginGalleryScroll }}" onPointerDown="{{ beginGalleryScroll }}" onWheel="{{ beginGalleryScroll }}" style="touch-action: pan-y pinch-zoom; position: fixed; left: 0; right: 0; top: 0; bottom: 0; padding-top: var(--header-height); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; display: flex; flex-direction: column; gap: 4px; padding-bottom: 340px; box-sizing: border-box;">
         <div style="height: 248px; flex-shrink: 0; position: relative;">
           <image-slot id="vdp-hero" src="assets/gallery/vdp-hero.webp" shape="rounded" radius="10" placeholder="Hero vehicle photo"></image-slot>
@@ -159,6 +187,7 @@
           </div>
         </sc-for>
       </div>
+      </sc-if>
 
       <!-- Header -->
       <div style="position: fixed; left: 0; right: 0; top: 0; height: var(--header-height); background: linear-gradient(to bottom, #000049 0%, rgba(0,0,73,0.8) 100%); z-index: 7; pointer-events: none;">
@@ -179,7 +208,17 @@
       <div style="position: fixed; left: 0; right: 0; top: var(--header-height); height: 27px; z-index: 3; pointer-events: none; background: linear-gradient(rgba(0,0,73,0.8), rgba(0,0,73,0.45) 45%, rgba(0,0,73,0));"></div>
 
       <!-- A visual copy of the gallery masks sheet overflow without adding an opaque navy backing. -->
-      <sc-if value="{{ sheetDocked }}" hint-placeholder-val="{{ false }}">
+      <sc-if value="{{ hCoverOn }}" hint-placeholder-val="{{ false }}">
+        <div class="gallery-header-cover" aria-hidden="true">
+          <div class="h-gallery-copy" ref="{{ hGalleryCoverRef }}">
+            <sc-for list="{{ hGalleryImages }}" as="img" hint-placeholder-count="3">
+              <img src="{{ img.src }}" alt="">
+            </sc-for>
+          </div>
+          <div style="position: absolute; left: 0; right: 0; top: var(--header-height); height: 27px; background: linear-gradient(rgba(0,0,73,0.8), rgba(0,0,73,0.45) 45%, rgba(0,0,73,0));"></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ vCoverOn }}" hint-placeholder-val="{{ false }}">
         <div class="gallery-header-cover" aria-hidden="true">
           <div class="gallery-header-copy" ref="{{ galleryCoverRef }}">
             <div style="height: 248px; flex-shrink: 0;"><img src="assets/gallery/vdp-hero.webp" alt=""></div>
@@ -389,6 +428,14 @@
         </div>
       </fieldset>
       <fieldset>
+        <legend>Gallery</legend>
+        <div class="settings-options">
+          <sc-for list="{{ galleryModes }}" as="m" hint-placeholder-count="2">
+            <button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.select }}" style="{{ m.style }}">{{ m.label }}</button>
+          </sc-for>
+        </div>
+      </fieldset>
+      <fieldset>
         <legend>Scroll gradient</legend>
         <div class="settings-options">
           <sc-for list="{{ gradientModes }}" as="m" hint-placeholder-count="4">
@@ -413,11 +460,20 @@ const h = React.createElement;
 const textIcon = h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinejoin: 'round' }, h('path', { d: 'M3 5h12v8H8l-3 3v-3H3z' }), h('path', { d: 'M15 9h6v8h-2v3l-3-3h-5v-4' }));
 const callIcon = h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinejoin: 'round' }, h('path', { d: 'M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z' }));
 
+const HGALLERY_IMAGES = [{ src: 'assets/gallery/vdp-hero.webp', alt: 'Front 3/4 view' }].concat(
+  [0, 1, 2, 3].flatMap(n => [
+    { src: 'assets/gallery/vdp-thumb-' + n + '-1.webp', alt: 'Rear 3/4 view' },
+    { src: 'assets/gallery/vdp-thumb-' + n + '-2.webp', alt: 'Rear view' },
+    { src: 'assets/gallery/vdp-thumb-' + n + '-3.webp', alt: 'Interior' },
+  ]));
+
 class Component extends DCLogic {
   state = { saved: true, snapOn: true };
   sheetRef = React.createRef();
   galleryRef = React.createRef();
   galleryCoverRef = React.createRef();
+  hGalleryRef = React.createRef();
+  hGalleryCoverRef = React.createRef();
   ctaRef = React.createRef();
   settingsRef = React.createRef();
   spacerRef = React.createRef();
@@ -449,6 +505,15 @@ class Component extends DCLogic {
   syncGalleryCover() {
     const copy = this.galleryCoverRef.current;
     if (copy) copy.style.transform = 'translateY(' + (-(this.galleryRef.current?.scrollTop || 0)) + 'px)';
+    const hCopy = this.hGalleryCoverRef.current;
+    if (hCopy) hCopy.style.transform = 'translateX(' + (-(this.hGalleryRef.current?.scrollLeft || 0)) + 'px)';
+  }
+  onHGalleryScroll() {
+    this.syncGalleryCover();
+    const g = this.hGalleryRef.current;
+    if (!g) return;
+    const index = Math.round(g.scrollLeft / (g.clientWidth + 4));
+    if (index !== (this.state.hIndex || 0)) this.setState({ hIndex: index });
   }
   beginGalleryScroll() {
     if (this.galleryActive) return;
@@ -486,7 +551,22 @@ class Component extends DCLogic {
   renderVals() {
     const { saved } = this.state;
     const stuck = this.state.stuck;
+    const horizontal = this.state.galleryMode === 'horizontal';
     return {
+      isHGallery: horizontal,
+      phoneClass: horizontal ? 'is-h-gallery' : '',
+      isVGallery: !horizontal,
+      hCoverOn: !!stuck && horizontal,
+      vCoverOn: !!stuck && !horizontal,
+      hGalleryRef: this.hGalleryRef,
+      hGalleryCoverRef: this.hGalleryCoverRef,
+      onHGalleryScroll: () => this.onHGalleryScroll(),
+      hGalleryImages: HGALLERY_IMAGES,
+      hGalleryCount: ((this.state.hIndex || 0) + 1) + ' / ' + HGALLERY_IMAGES.length,
+      galleryModes: [['vertical', 'Vertical'], ['horizontal', 'Horizontal']].map(([k, label]) => {
+        const on = (this.state.galleryMode || 'vertical') === k;
+        return { label, selected: on, select: () => { this.galleryActive = false; this.setState({ galleryMode: k, hIndex: 0 }); }, style: { minHeight: 44, padding: '0 18px', borderRadius: 12, border: 'none', cursor: 'pointer', textAlign: 'left', font: '500 15px/1 var(--font-body)', background: on ? 'var(--cg-midnight)' : 'transparent', color: on ? '#fff' : 'var(--ink-900)', transition: 'background 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
+      }),
       galleryRef: this.galleryRef,
       galleryCoverRef: this.galleryCoverRef,
       onGalleryScroll: () => this.syncGalleryCover(),
