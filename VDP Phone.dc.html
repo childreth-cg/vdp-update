@@ -140,6 +140,13 @@
     .settings-content fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
     .settings-content legend { padding: 0; margin-bottom: 10px; font: 500 15px/1.4 var(--font-body); }
     .settings-options { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; background: #fff; border-radius: 16px; }
+    .settings-select label { display: block; margin-bottom: 10px; font: 500 15px/1.4 var(--font-body); }
+    .settings-select select {
+      width: 100%; min-height: 52px; padding: 0 44px 0 18px; border: 0; border-radius: 16px; cursor: pointer;
+      appearance: none; -webkit-appearance: none; color: var(--ink-900); font: 500 15px/1 var(--font-body);
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23000049' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 18px center;
+    }
+    .settings-select select:focus-visible { outline: 3px solid var(--cg-blue); outline-offset: 3px; }
     .settings-qr { border-top: 1px solid var(--gray-300); padding-top: 16px; text-align: center; }
     .settings-qr h3 { margin: 0 0 12px; font: 500 16px/1.4 var(--font-body); }
     .settings-qr a { display: flex; flex-direction: column; align-items: center; gap: 8px; font: 400 14px/1.4 var(--font-body); }
@@ -435,14 +442,14 @@
           </sc-for>
         </div>
       </fieldset>
-      <fieldset>
-        <legend>Scroll gradient</legend>
-        <div class="settings-options">
+      <div class="settings-select">
+        <label for="gradient-select">Scroll gradient</label>
+        <select id="gradient-select" value="{{ gradientMode }}" onChange="{{ selectGradient }}">
           <sc-for list="{{ gradientModes }}" as="m" hint-placeholder-count="4">
-            <button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.select }}" style="{{ m.style }}">{{ m.label }}</button>
+            <option value="{{ m.value }}">{{ m.label }}</option>
           </sc-for>
-        </div>
-      </fieldset>
+        </select>
+      </div>
       <section class="settings-qr" aria-labelledby="settings-qr-title">
         <h3 id="settings-qr-title">Open on your phone</h3>
         <a href="https://childreth-cg.github.io/vdp-update/VDP%20Phone.dc.html">
@@ -582,10 +589,9 @@ class Component extends DCLogic {
         const on = !!this.state.snapOn === k;
         return { label, selected: on, select: () => this.setState({ snapOn: k }), style: { minHeight: 44, padding: '0 18px', borderRadius: 12, border: 'none', cursor: 'pointer', textAlign: 'left', font: '500 15px/1 var(--font-body)', background: on ? 'var(--cg-midnight)' : 'transparent', color: on ? '#fff' : 'var(--ink-900)', transition: 'background 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
       }),
-      gradientModes: [['none', 'None'], ['1', 'Var 1'], ['a', 'Var 2 - dark'], ['c', 'Var 4 - light']].map(([k, label]) => {
-        const on = (this.state.gradientMode || 'none') === k;
-        return { label, selected: on, select: () => this.setState({ gradientMode: k }), style: { minHeight: 44, padding: '0 18px', borderRadius: 12, border: 'none', cursor: 'pointer', textAlign: 'left', font: '500 15px/1 var(--font-body)', background: on ? 'var(--cg-midnight)' : 'transparent', color: on ? '#fff' : 'var(--ink-900)', transition: 'background 160ms cubic-bezier(0.2,0.6,0.2,1)' } };
-      }),
+      gradientModes: [['none', 'None'], ['1', 'Var 1'], ['a', 'Var 2 - dark'], ['c', 'Var 4 - light']].map(([value, label]) => ({ value, label })),
+      gradientMode: this.state.gradientMode || 'none',
+      selectGradient: (e) => this.setState({ gradientMode: e.target.value }),
       sheetBodyClass: { 1: 'has-scroll-gradient-1', a: 'has-scroll-gradient', c: 'has-scroll-gradient-c' }[this.state.gradientMode] || '',
       isDocked:!!(this.state.tray || this.state.trayExiting) && (this.state.trayMode || 'docked') === 'docked',
       isFloating: !!(this.state.tray || this.state.trayExiting) && this.state.trayMode === 'floating',
