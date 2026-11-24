@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Primary button, VDP mod</title>
+  <style>
+    @font-face {
+      font-family: "Graphik";
+      src: url("fonts/Graphik-Medium-Web.woff2") format("woff2"),
+        url("fonts/Graphik-Medium.otf") format("opentype");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* Chassis tokens used by the button */
+    :root {
+      --text-secondary: #ffffff;
+      --text-action-link: #0763d3;
+      --surface-primary-1: #ffffff;
+      --surface-action-primary-default: #0763d3;
+      --round: 999px;
+      --text-button-lg-font-family: 'Graphik', Helvetica, Arial, sans-serif;
+      --text-button-lg-font-size: 1rem;
+      --text-button-lg-font-weight: 500;
+      --text-button-lg-font-line-height: 1.5rem;
+      --text-button-lg-font-letter-spacing: 0.0125rem;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F4F6F9;
+    }
+
+    .wrapper {
+      display: flex;
+      gap: 16px;
+      flex-direction: column;
+    }
+
+    .bigger {
+      transform: scale(3);
+    }
+
+    /* Animatable gradient stops: shift on hover/press */
+    @property --vdp-btn-stop-1 {
+      syntax: '<percentage>';
+      inherits: false;
+      initial-value: 20%;
+    }
+
+    @property --vdp-btn-stop-2 {
+      syntax: '<percentage>';
+      inherits: false;
+      initial-value: 136%;
+    }
+
+    .vdp-btn {
+      box-sizing: border-box;
+      width: 334px;
+      height: 44px;
+      padding: 12px 20px;
+      gap: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      border-radius: var(--round, 999px);
+      color: var(--text-secondary, #FFF);
+      /* Button/lg */
+      font-family: var(--text-button-lg-font-family, 'Graphik', Helvetica, Arial, sans-serif);
+      font-size: var(--text-button-lg-font-size, 16px);
+      font-style: normal;
+      font-weight: var(--text-button-lg-font-weight, 500);
+      line-height: var(--text-button-lg-font-line-height, 24px);
+      /* 150% */
+      letter-spacing: var(--text-button-lg-font-letter-spacing, 0.2px);
+      background-color: var(--surface-action-primary-default, #0763d3);
+      background-image: linear-gradient(180deg, #0763d3 var(--vdp-btn-stop-1), #000049 var(--vdp-btn-stop-2));
+      -webkit-tap-highlight-color: transparent;
+      /* suppress mobile tap flash */
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .12), inset 0 -4px 4px #00004929;
+      transition: --vdp-btn-stop-1 200ms ease, --vdp-btn-stop-2 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    /* Hover only on devices with a real hover-capable pointer (no sticky hover on touch) */
+    @media (hover: hover) and (pointer: fine) {
+      .vdp-btn:hover {
+        --vdp-btn-stop-1: -12%;
+        --vdp-btn-stop-2: 136%;
+      }
+    }
+
+    .vdp-btn:active {
+      transform: scale(.99);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0), inset 0 4px 4px #00004766;
+    }
+
+    .vdp-btn:focus-visible {
+      outline: 2px solid var(--text-action-link, #0763d3);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .vdp-btn {
+        transition: none;
+      }
+    }
+
+    .vdp-btn:active {
+      --vdp-btn-stop-1: -64%;
+      --vdp-btn-stop-2: 120%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <button type="button" class="vdp-btn">Check availability</button>
+  </div>
+</body>
+
+</html>
